@@ -15,7 +15,7 @@ namespace A1
         {
             string[] verse = new string [6];    /*einzelnen Verse in neuem Array zwischenspeichern, mind. 5 Zeilen */
             for (int i=0; i < verse.Length; i++){   /*Array durchlaufen, damit alle Zeilen erstellt werden */
-                GetVerse();  /*Methodenaufruf in der Main */
+                GetVerse();                             /*Methodenaufruf in der Main */
                 verse[i] = subj + " " + verb + " " + obj;   /*Zeilen bestehen aus subj+verb+obj */
             }
             foreach(string zeile in verse){  /*foreach durchläuft die Elemente des arrays string[]verse  */
