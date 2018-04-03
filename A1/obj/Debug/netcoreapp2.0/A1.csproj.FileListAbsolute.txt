@@ -1,0 +1,10 @@
+C:\Users\Katharina\Desktop\Softwaredesign\SoftwareDesign\A1\bin\Debug\netcoreapp2.0\A1.deps.json
+C:\Users\Katharina\Desktop\Softwaredesign\SoftwareDesign\A1\bin\Debug\netcoreapp2.0\A1.runtimeconfig.json
+C:\Users\Katharina\Desktop\Softwaredesign\SoftwareDesign\A1\bin\Debug\netcoreapp2.0\A1.runtimeconfig.dev.json
+C:\Users\Katharina\Desktop\Softwaredesign\SoftwareDesign\A1\bin\Debug\netcoreapp2.0\A1.dll
+C:\Users\Katharina\Desktop\Softwaredesign\SoftwareDesign\A1\bin\Debug\netcoreapp2.0\A1.pdb
+C:\Users\Katharina\Desktop\Softwaredesign\SoftwareDesign\A1\obj\Debug\netcoreapp2.0\A1.csproj.CoreCompileInputs.cache
+C:\Users\Katharina\Desktop\Softwaredesign\SoftwareDesign\A1\obj\Debug\netcoreapp2.0\A1.AssemblyInfoInputs.cache
+C:\Users\Katharina\Desktop\Softwaredesign\SoftwareDesign\A1\obj\Debug\netcoreapp2.0\A1.AssemblyInfo.cs
+C:\Users\Katharina\Desktop\Softwaredesign\SoftwareDesign\A1\obj\Debug\netcoreapp2.0\A1.dll
+C:\Users\Katharina\Desktop\Softwaredesign\SoftwareDesign\A1\obj\Debug\netcoreapp2.0\A1.pdb
