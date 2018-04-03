@@ -1,0 +1,10 @@
+C:\Users\Katharina\Desktop\Softwaredesign\SoftwareDesign\L02\bin\Debug\netcoreapp2.0\L02.deps.json
+C:\Users\Katharina\Desktop\Softwaredesign\SoftwareDesign\L02\bin\Debug\netcoreapp2.0\L02.runtimeconfig.json
+C:\Users\Katharina\Desktop\Softwaredesign\SoftwareDesign\L02\bin\Debug\netcoreapp2.0\L02.runtimeconfig.dev.json
+C:\Users\Katharina\Desktop\Softwaredesign\SoftwareDesign\L02\bin\Debug\netcoreapp2.0\L02.dll
+C:\Users\Katharina\Desktop\Softwaredesign\SoftwareDesign\L02\bin\Debug\netcoreapp2.0\L02.pdb
+C:\Users\Katharina\Desktop\Softwaredesign\SoftwareDesign\L02\obj\Debug\netcoreapp2.0\L02.csproj.CoreCompileInputs.cache
+C:\Users\Katharina\Desktop\Softwaredesign\SoftwareDesign\L02\obj\Debug\netcoreapp2.0\L02.AssemblyInfoInputs.cache
+C:\Users\Katharina\Desktop\Softwaredesign\SoftwareDesign\L02\obj\Debug\netcoreapp2.0\L02.AssemblyInfo.cs
+C:\Users\Katharina\Desktop\Softwaredesign\SoftwareDesign\L02\obj\Debug\netcoreapp2.0\L02.dll
+C:\Users\Katharina\Desktop\Softwaredesign\SoftwareDesign\L02\obj\Debug\netcoreapp2.0\L02.pdb
