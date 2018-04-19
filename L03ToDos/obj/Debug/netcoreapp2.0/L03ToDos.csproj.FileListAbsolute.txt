@@ -1,0 +1,10 @@
+C:\Users\Katharina\Desktop\Softwaredesign\SoftwareDesign\L03ToDos\bin\Debug\netcoreapp2.0\L03ToDos.deps.json
+C:\Users\Katharina\Desktop\Softwaredesign\SoftwareDesign\L03ToDos\bin\Debug\netcoreapp2.0\L03ToDos.runtimeconfig.json
+C:\Users\Katharina\Desktop\Softwaredesign\SoftwareDesign\L03ToDos\bin\Debug\netcoreapp2.0\L03ToDos.runtimeconfig.dev.json
+C:\Users\Katharina\Desktop\Softwaredesign\SoftwareDesign\L03ToDos\bin\Debug\netcoreapp2.0\L03ToDos.dll
+C:\Users\Katharina\Desktop\Softwaredesign\SoftwareDesign\L03ToDos\bin\Debug\netcoreapp2.0\L03ToDos.pdb
+C:\Users\Katharina\Desktop\Softwaredesign\SoftwareDesign\L03ToDos\obj\Debug\netcoreapp2.0\L03ToDos.csproj.CoreCompileInputs.cache
+C:\Users\Katharina\Desktop\Softwaredesign\SoftwareDesign\L03ToDos\obj\Debug\netcoreapp2.0\L03ToDos.AssemblyInfoInputs.cache
+C:\Users\Katharina\Desktop\Softwaredesign\SoftwareDesign\L03ToDos\obj\Debug\netcoreapp2.0\L03ToDos.AssemblyInfo.cs
+C:\Users\Katharina\Desktop\Softwaredesign\SoftwareDesign\L03ToDos\obj\Debug\netcoreapp2.0\L03ToDos.dll
+C:\Users\Katharina\Desktop\Softwaredesign\SoftwareDesign\L03ToDos\obj\Debug\netcoreapp2.0\L03ToDos.pdb
