@@ -23,14 +23,14 @@ namespace A4
             child2.AppendChild(grand21);
             child1.RemoveChild(grand12);
 
-            Console.WriteLine(root.PrintTree());
+            root.PrintTree("");                 //String muss mitgegeben werden, am Anfang leer, siehe PrintTree()
         }
 
         class TreeNode<T>
         {
             private T _item;  //Person
             private TreeNode<T> _parentNode;
-            private List <TreeNode<T>> _children = new List<TreeNode<T>>();
+            private List <TreeNode<T>> _children;
 
             public TreeNode(){
                 
@@ -43,20 +43,24 @@ namespace A4
             }
             public TreeNode(T item)
             { 
-                _item = item;          // Wenn Person root, keine Eltern werden mitgegeben
+                _item = item;                                        // Wenn Person root, keine Eltern werden mitgegeben
             } 
 
             public TreeNode(T item, TreeNode<T> _parentNode)
             { 
                 _item = item;          
-                _parentNode.AppendChild(this);  //Person wird als child an AppenChild übergeben
+                _parentNode.AppendChild(this);                      //Person wird als child an AppenChild übergeben
             } 
 
             public void AppendChild(TreeNode<T> child)
             {
-                _children.Add(child);           //erstellt Child in Array
-                child._parentNode = this;       // hängt Child an _parentNode
-            } 
+                if(_children == null){                              //Exception wegen null, checken ob null,
+                    _children = new List<TreeNode<T>>{child};       //dann neue Liste mit übergebenem child
+                }else{
+                    _children.Add(child);                           //erstellt Child in Array
+                }
+                child._parentNode = this;                           //hängt Child an _parentNode, 
+            }                                                       //außerhalb if-else da immer parent eingetragen werden muss
 
             public void RemoveChild(TreeNode<T> child)
             {
@@ -64,9 +68,15 @@ namespace A4
                //child._parentNode = this;
             }
 
-            public String PrintTree(){
-                return _item.ToString();
+            public void PrintTree(String sternchen){                    //public void, damit Code Müller eingehalten wird, String sternchen mitgeben für children
+                Console.WriteLine(sternchen + _item.ToString());        //kein return, Console.WriteLine
+                if(_children != null ){                                 //null Reference Exception (etwas wurde auf null referenziert), Bedingung !=null
+                    foreach(var child in _children){                   
+                        child.PrintTree(sternchen+"*");                 // für jedes child nochmal ausführen, rekursiver Aufruf
+                    }
+                }
             }
         }
     }
 }
+
