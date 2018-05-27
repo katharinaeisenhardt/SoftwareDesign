@@ -24,7 +24,12 @@ namespace A4
             child1.RemoveChild(grand12);
 
             root.PrintTree("");                 //String muss mitgegeben werden, am Anfang leer, siehe PrintTree()
-            List<TreeNode<String>> lastList = root.FindNode("child1", new List <TreeNode<String>>());
+            var found = new List <TreeNode<String>>();
+            root.FindNode("child1", found);
+
+            foreach(var f in found){
+                Console.WriteLine(f);
+            }
         }
 
         class TreeNode<T>
@@ -69,16 +74,16 @@ namespace A4
                //child._parentNode = this;
             }
 
-            public List<TreeNode<T>> FindNode(T search, List<TreeNode<T>> returnList){
+            public List<TreeNode<T>> FindNode(T search, List<TreeNode<T>> foundNodes){
                 if(_item.Equals(search)){
-                   returnList.Add(this);
+                   foundNodes.Add(this);
                 }
                 if (_children != null){
                     foreach(var child in _children){
-                       child.FindNode(search, returnList);
+                       child.FindNode(search, foundNodes);
                     }
                 }
-                return returnList;
+                return foundNodes;
             }
 
             public void PrintTree(String sternchen){                    //public void, damit Code Müller eingehalten wird, String sternchen mitgeben für children
@@ -92,4 +97,3 @@ namespace A4
         }
     }
 }
-
