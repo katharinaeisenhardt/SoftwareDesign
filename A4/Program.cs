@@ -24,7 +24,7 @@ namespace A4
             child1.RemoveChild(grand12);
 
             root.PrintTree("");                 //String muss mitgegeben werden, am Anfang leer, siehe PrintTree()
-            List<TreeNode<String>> lastList = root.FindNode("child1", new List<TreeNode<String>>());
+            List<TreeNode<String>> lastList = root.FindNode("child1", new List <TreeNode<String>>());
         }
 
         class TreeNode<T>
@@ -70,14 +70,14 @@ namespace A4
             }
 
             public List<TreeNode<T>> FindNode(T search, List<TreeNode<T>> returnList){
-               if(_item.Equals(search)){
+                if(_item.Equals(search)){
                    returnList.Add(this);
-               }
-               if (_children != null){
-                   foreach(var child in _children){
+                }
+                if (_children != null){
+                    foreach(var child in _children){
                        child.FindNode(search, returnList);
-                   }
-               }
+                    }
+                }
                 return returnList;
             }
 
