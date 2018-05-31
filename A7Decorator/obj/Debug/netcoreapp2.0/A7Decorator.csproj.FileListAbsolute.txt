@@ -1,0 +1,11 @@
+C:\Users\Katharina\Desktop\Softwaredesign\SoftwareDesign\A7Decorator\bin\Debug\netcoreapp2.0\A7Decorator.deps.json
+C:\Users\Katharina\Desktop\Softwaredesign\SoftwareDesign\A7Decorator\bin\Debug\netcoreapp2.0\A7Decorator.runtimeconfig.json
+C:\Users\Katharina\Desktop\Softwaredesign\SoftwareDesign\A7Decorator\bin\Debug\netcoreapp2.0\A7Decorator.runtimeconfig.dev.json
+C:\Users\Katharina\Desktop\Softwaredesign\SoftwareDesign\A7Decorator\bin\Debug\netcoreapp2.0\A7Decorator.dll
+C:\Users\Katharina\Desktop\Softwaredesign\SoftwareDesign\A7Decorator\bin\Debug\netcoreapp2.0\A7Decorator.pdb
+C:\Users\Katharina\Desktop\Softwaredesign\SoftwareDesign\A7Decorator\obj\Debug\netcoreapp2.0\A7Decorator.csprojResolveAssemblyReference.cache
+C:\Users\Katharina\Desktop\Softwaredesign\SoftwareDesign\A7Decorator\obj\Debug\netcoreapp2.0\A7Decorator.csproj.CoreCompileInputs.cache
+C:\Users\Katharina\Desktop\Softwaredesign\SoftwareDesign\A7Decorator\obj\Debug\netcoreapp2.0\A7Decorator.AssemblyInfoInputs.cache
+C:\Users\Katharina\Desktop\Softwaredesign\SoftwareDesign\A7Decorator\obj\Debug\netcoreapp2.0\A7Decorator.AssemblyInfo.cs
+C:\Users\Katharina\Desktop\Softwaredesign\SoftwareDesign\A7Decorator\obj\Debug\netcoreapp2.0\A7Decorator.dll
+C:\Users\Katharina\Desktop\Softwaredesign\SoftwareDesign\A7Decorator\obj\Debug\netcoreapp2.0\A7Decorator.pdb

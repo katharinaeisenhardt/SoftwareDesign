@@ -1,0 +1,11 @@
+C:\Users\Katharina\Desktop\Softwaredesign\SoftwareDesign\UML\bin\Debug\netcoreapp2.0\UML.deps.json
+C:\Users\Katharina\Desktop\Softwaredesign\SoftwareDesign\UML\bin\Debug\netcoreapp2.0\UML.runtimeconfig.json
+C:\Users\Katharina\Desktop\Softwaredesign\SoftwareDesign\UML\bin\Debug\netcoreapp2.0\UML.runtimeconfig.dev.json
+C:\Users\Katharina\Desktop\Softwaredesign\SoftwareDesign\UML\bin\Debug\netcoreapp2.0\UML.dll
+C:\Users\Katharina\Desktop\Softwaredesign\SoftwareDesign\UML\bin\Debug\netcoreapp2.0\UML.pdb
+C:\Users\Katharina\Desktop\Softwaredesign\SoftwareDesign\UML\obj\Debug\netcoreapp2.0\UML.csprojResolveAssemblyReference.cache
+C:\Users\Katharina\Desktop\Softwaredesign\SoftwareDesign\UML\obj\Debug\netcoreapp2.0\UML.csproj.CoreCompileInputs.cache
+C:\Users\Katharina\Desktop\Softwaredesign\SoftwareDesign\UML\obj\Debug\netcoreapp2.0\UML.AssemblyInfoInputs.cache
+C:\Users\Katharina\Desktop\Softwaredesign\SoftwareDesign\UML\obj\Debug\netcoreapp2.0\UML.AssemblyInfo.cs
+C:\Users\Katharina\Desktop\Softwaredesign\SoftwareDesign\UML\obj\Debug\netcoreapp2.0\UML.dll
+C:\Users\Katharina\Desktop\Softwaredesign\SoftwareDesign\UML\obj\Debug\netcoreapp2.0\UML.pdb
