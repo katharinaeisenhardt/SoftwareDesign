@@ -1,0 +1,4 @@
+c:\Users\Katharina\Desktop\Softwaredesign\SoftwareDesign\UnitTests\EmailChecker-Test\obj\Debug\netcoreapp2.0\EmailChecker-Test.csprojResolveAssemblyReference.cache
+c:\Users\Katharina\Desktop\Softwaredesign\SoftwareDesign\UnitTests\EmailChecker-Test\obj\Debug\netcoreapp2.0\EmailChecker-Test.csproj.CoreCompileInputs.cache
+c:\Users\Katharina\Desktop\Softwaredesign\SoftwareDesign\UnitTests\EmailChecker-Test\obj\Debug\netcoreapp2.0\EmailChecker-Test.AssemblyInfoInputs.cache
+c:\Users\Katharina\Desktop\Softwaredesign\SoftwareDesign\UnitTests\EmailChecker-Test\obj\Debug\netcoreapp2.0\EmailChecker-Test.AssemblyInfo.cs
