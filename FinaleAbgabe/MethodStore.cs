@@ -35,7 +35,7 @@ namespace FinaleAbgabe
 
                 case "n":
                 case "no":
-                Console.WriteLine("Ohhh little one! You might want to go back and equip yourself to be the strongest Golemslayer ever...");
+                Console.WriteLine("Ohhh little one! You might want to go back and equip yourself to be the strongest monster slayer ever...");
                 break;
 
                 default:
@@ -93,7 +93,7 @@ namespace FinaleAbgabe
                 break;
 
                 /* 
-                    Console.WriteLine("You can't fight like this! Try another input. Valid inputs are: [arm/a <item>] [use/u <item>] [inventory/i] [quit/q]");
+                    Console.WriteLine("You can't fight like this! Try another input. Valid inputs are: [arm/a <item>] [use/u <item>] [inventory/i] [quit/q] and [fight/f] while fighting");
                     */
                 default:
                 if(isFightCase == true)
@@ -116,7 +116,7 @@ namespace FinaleAbgabe
             {
                 case "h":
                 case "help":
-                //Use(string [_words[1]] input);
+                Help();
                 break;
 
                 case "l":
@@ -209,6 +209,7 @@ namespace FinaleAbgabe
                         isFightCase = true;
                         Console.WriteLine("There's an enemy! You're getting attacked."+ Environment.NewLine/*+ enemyInfo +*/ + "Fight him!");
                         CheckCases();
+                        CheckCases();
 
                         break;
 
@@ -217,6 +218,7 @@ namespace FinaleAbgabe
                         isFightCase = true;
                         Console.WriteLine("There's an enemy!"+ Environment.NewLine/*+ enemyInfo +*/ + "Fight him!");
                         CheckCases();
+                        //quitgame();
 
                         break;
 
@@ -241,12 +243,46 @@ namespace FinaleAbgabe
             {
                 case "f":
                 case "fight":
+                enemycharac._lifepoints = (float)(Math.Round((enemycharac._lifepoints - GameData.characters["Godess of the forest"]._hitpoints), 2));
+                if(enemycharac._lifepoints > 0F)
+                {
+                    Console.WriteLine("Woooo!!!" + Environment.NewLine +"Damn! The " + enemycharac._name + "'s still alive...He still has got" + enemycharac._lifepoints + "lifepoints.");
+                    GameData.characters["Godess of the forest"]._lifepoints = (float)(Math.Round((GameData.characters["Godess of the forest"]._lifepoints - enemycharac._hitpoints), 2));
+                    if(GameData.characters["Godess of the forest"]._lifepoints > 0F)
+                    {
+                        Console.WriteLine("Oouuuch! Augh!!! Oh, you dirty creature! I'm gonna finish you on the spot!" + Environment.NewLine + " You've got " + GameData.characters["Godess of the forest"]._lifepoints + "lifepoints. Fight him 'till the end!");
+                        CheckCases();
+                    }
+                    else
+                    {
+                        Console.WriteLine("NOOOOOOOO! How could you! Now you're dead! Stupid! Loser! Try this game again...");
+                        //quitgame();
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Wahhh! Nooo!!!" + Environment.NewLine +"Congratulations, great adventurer! You slayed the " + enemycharac._name + "! Awesome!");
+                    isFightCase = false;
+                    enemycharac._lifepoints = 1F;
+                }
                 break;
 
-
+                default:
+                Console.WriteLine("Ohhh little one! You're far too slow for this. It's kind of impossible...");
+                GameData.characters["Godess of the forest"]._lifepoints = (float)(Math.Round((GameData.characters["Godess of the forest"]._lifepoints - enemycharac._hitpoints), 2));
+                if(GameData.characters["Godess of the forest"]._lifepoints > 0F)
+                {
+                    Console.WriteLine("Oouuuch! Augh!!! Oh, you dirty creature! I'm gonna finish you on the spot!" + Environment.NewLine + " You've got " + GameData.characters["Godess of the forest"]._lifepoints + "lifepoints. Fight him 'till the end!");
+                    Console.WriteLine("You can't fight like this! Try another input. Valid inputs are: [fight/f] [arm/a <item>] [use/u <item>] [inventory/i] and [quit/q]");
+                    CheckCases();
+                }
+                else
+                {
+                    Console.WriteLine("NOOOOOOOO! How could you! Now you're dead! Stupid! Loser! Try this game again...");
+                    //quitgame();
+                }
+                break;
             }
-            enemycharac._lifepoints = enemycharac._lifepoints - GameData.characters["Godess of the forest"]._hitpoints;
-            Console.WriteLine("Damn! The enemy's still alive..." + enemycharac._lifepoints+ "");
         }
     }
 }
