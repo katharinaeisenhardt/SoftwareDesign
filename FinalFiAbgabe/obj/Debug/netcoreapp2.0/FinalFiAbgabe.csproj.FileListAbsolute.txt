@@ -1,0 +1,11 @@
+C:\Users\Katharina\Desktop\Softwaredesign\SoftwareDesign\FinalFiAbgabe\bin\Debug\netcoreapp2.0\FinalFiAbgabe.deps.json
+C:\Users\Katharina\Desktop\Softwaredesign\SoftwareDesign\FinalFiAbgabe\bin\Debug\netcoreapp2.0\FinalFiAbgabe.runtimeconfig.json
+C:\Users\Katharina\Desktop\Softwaredesign\SoftwareDesign\FinalFiAbgabe\bin\Debug\netcoreapp2.0\FinalFiAbgabe.runtimeconfig.dev.json
+C:\Users\Katharina\Desktop\Softwaredesign\SoftwareDesign\FinalFiAbgabe\bin\Debug\netcoreapp2.0\FinalFiAbgabe.dll
+C:\Users\Katharina\Desktop\Softwaredesign\SoftwareDesign\FinalFiAbgabe\bin\Debug\netcoreapp2.0\FinalFiAbgabe.pdb
+C:\Users\Katharina\Desktop\Softwaredesign\SoftwareDesign\FinalFiAbgabe\obj\Debug\netcoreapp2.0\FinalFiAbgabe.csprojResolveAssemblyReference.cache
+C:\Users\Katharina\Desktop\Softwaredesign\SoftwareDesign\FinalFiAbgabe\obj\Debug\netcoreapp2.0\FinalFiAbgabe.csproj.CoreCompileInputs.cache
+C:\Users\Katharina\Desktop\Softwaredesign\SoftwareDesign\FinalFiAbgabe\obj\Debug\netcoreapp2.0\FinalFiAbgabe.AssemblyInfoInputs.cache
+C:\Users\Katharina\Desktop\Softwaredesign\SoftwareDesign\FinalFiAbgabe\obj\Debug\netcoreapp2.0\FinalFiAbgabe.AssemblyInfo.cs
+C:\Users\Katharina\Desktop\Softwaredesign\SoftwareDesign\FinalFiAbgabe\obj\Debug\netcoreapp2.0\FinalFiAbgabe.dll
+C:\Users\Katharina\Desktop\Softwaredesign\SoftwareDesign\FinalFiAbgabe\obj\Debug\netcoreapp2.0\FinalFiAbgabe.pdb

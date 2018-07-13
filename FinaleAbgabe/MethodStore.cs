@@ -5,23 +5,32 @@ namespace FinaleAbgabe
 {
     class MethodStore
     {
-        public static string [] _words;
-        public static bool _fightCase;
+        public static string[] _words;
+        public static bool isFightCase = false;
 
-        public static void gameIntroduction()
+        public static GameData.Character _enemy;
+
+        public static void GameIntroduction()
         {
-            string intro = "Welcome adventurer! You just entered the sacred forest of Dzed..." /*+ GameData.characters["Godess of the forest"].information*/;
+            string intro = "Welcome adventurer! You just entered the sacred forest of Dzed..."/*+Avatar.information*/;
             Console.WriteLine(intro);
+            GameData.CreateRooms();
+            GameData.CreateCharaters();
         }
 
+        public static void Talk()
+        {
+            Console.WriteLine("Greetings, brave adventurer. I'm the Dragon of the sea! I have some good advice for you..." + Environment.NewLine + "In the north you will find the strongest person in this world! At least the strongest enemy." + Environment.NewLine +"Allow me to ask you a question: 'Did you take the chance to slay a Golem yet?'");
+            MethodStore.TalkCases();
+        }
         public static void TalkCases()
         {
-            string uinput = Console.ReadLine().ToLower();
-            switch(uinput)
+            string input = Console.ReadLine().ToLower();
+            switch (input)
             {
                 case "y":
                 case "yes":
-                Console.WriteLine("Excellent, my mighty warrior. Go now and fulfill your fate on the darkest path in the north!");
+                Console.WriteLine("Excellent, my mighty warrior. Go now and fulfill your fate on the darkest path in the north!"); 
                 break;
 
                 case "n":
@@ -36,36 +45,41 @@ namespace FinaleAbgabe
             }
         }
 
-        public static void CheckCases()
+        public static void Help()
         {
-            var readline = Console.ReadLine().ToLower();
-            SplitInput(readline);
-            CheckNonFightCases(_words);
+            Console.WriteLine("You can use the following commands:"+ Environment.NewLine);
+            foreach (var command in GameData.commands)
+                Console.WriteLine(command);
         }
 
-        public static Array SplitInput(string input)
+        public static void CheckCases()
         {
-            _words = input.Split(' ');
-            /*for (int i = 0; i < words.Length; i ++) 
-            Console.WriteLine(words[i]);*/
+            Console.WriteLine("What would you like to do?");
+            string input = Console.ReadLine().ToLower();
+            SplitInput(input);
+            CheckFightCases(_words);
+        }
+
+        public static Array SplitInput(string input) 
+        {
+            _words = input.Split(" ");
             return _words;
         }
 
-        public static void CheckFightCases(string [] words)
+        public static void CheckFightCases(string[] input)
         {
-            _words = words;
-            _fightCase = true;
+            _words = input;
 
-            switch(words[0])
+            switch (_words[0])
             {
                 case "u":
                 case "use":
-                //Use();
+                //Use(string [] input);
                 break;
 
                 case "a":
                 case "arm":
-                //Arm();
+                //Arm(string [] input);
                 break;
 
                 case "i":
@@ -78,118 +92,161 @@ namespace FinaleAbgabe
                 //QuitGame();
                 break;
 
-                //if enemy in raum 
-                /*default:
-                if()
-                {
-                    
-                }
-                _fightCase = false;
-                Console.WriteLine("You can't fight like this! Try another input. Valid inputs are: [arm/a <item>] [use/u <item>] [inventory/i] [quit/q]");
-                break;
-
-                /*else*/
+                /* 
+                    Console.WriteLine("You can't fight like this! Try another input. Valid inputs are: [arm/a <item>] [use/u <item>] [inventory/i] [quit/q]");
+                    */
                 default:
-                _fightCase = false; //-> wenn if else works, kein bool benötigt
-                CheckNonFightCases(words);
+                if(isFightCase == true)
+                {
+                    Fight(_enemy, _words);
+                }
+                else{
+                CheckNonFightCases(_words);
+                }
                 break;
-            } 
+            }
         }
 
-        public static void CheckNonFightCases(string [] words)
-        {
-            _words = words;
 
-            switch(words[0])
+        public static void CheckNonFightCases(string[] input)
+        {
+            _words = input;
+
+            switch (_words[0])
             {
                 case "h":
                 case "help":
-                Help();
+                //Use(string [_words[1]] input);
                 break;
 
-                /*case "l":
+                case "l":
                 case "look":
-                //Look();
+                Console.WriteLine("in loook");
+                //Arm(string [_words[1]] input);
                 break;
 
                 case "t":
                 case "take":
-                //Take(words[1]);
+                //DisplayInventory();
                 break;
 
                 case "d":
                 case "drop":
-                //Drop(words[1]);
+                //Drop();
                 break;
-                 */
+
                 case "n":
                 case "north":
-                if(GameData.characters["Godess of the forest"]._currentLocation.north != null)
+                if (GameData.characters["Godess of the forest"]._currentLocation.north != null)
                 {
-                    GameData.characters["Godess of the forest"]._currentLocation =GameData.characters["Godess of the forest"]._currentLocation.north;
+                    GameData.characters["Godess of the forest"]._currentLocation = GameData.characters["Godess of the forest"]._currentLocation.north;
+                    // EnemyChangeRoom()
                     GameData.Room.RoomDescription(GameData.characters["Godess of the forest"]._currentLocation);
                 }
                 else
                 {
-                    Console.WriteLine("What to do?! There's a dead end");
+                    Console.WriteLine("What to do?! There's a dead end...");
                 }
                 break;
 
                 case "e":
                 case "east":
-                if(GameData.characters["Godess of the forest"]._currentLocation.east != null)
+                if (GameData.characters["Godess of the forest"]._currentLocation.east != null)
                 {
                     GameData.characters["Godess of the forest"]._currentLocation = GameData.characters["Godess of the forest"]._currentLocation.east;
-                    //MonsterRoomChange();
                     GameData.Room.RoomDescription(GameData.characters["Godess of the forest"]._currentLocation);
                 }
                 else
                 {
-                    Console.WriteLine("What to do?! There's a dead end");
+                    Console.WriteLine("What to do?! There's a dead end...");
                 }
                 break;
 
                 case "s":
                 case "south":
-                if(GameData.characters["Godess of the forest"]._currentLocation.south != null)
+                if (GameData.characters["Godess of the forest"]._currentLocation.south != null)
                 {
                     GameData.characters["Godess of the forest"]._currentLocation = GameData.characters["Godess of the forest"]._currentLocation.south;
-                    //MonsterRoomChange();
                     GameData.Room.RoomDescription(GameData.characters["Godess of the forest"]._currentLocation);
                 }
                 else
                 {
-                    Console.WriteLine("What to do?! There's a dead end");
+                    Console.WriteLine("What to do?! There's a dead end...");
                 }
                 break;
 
                 case "w":
                 case "west":
-                if(GameData.characters["Godess of the forest"]._currentLocation.west != null)
+                if (GameData.characters["Godess of the forest"]._currentLocation.west != null)
                 {
                     GameData.characters["Godess of the forest"]._currentLocation = GameData.characters["Godess of the forest"]._currentLocation.west;
-                    //MonsterRoomChange();
-                    GameData.Room.RoomDescription(GameData.characters["Godess of the forest"]._currentLocation);
+                    GameData.Room.RoomDescription(GameData.characters["Godess of the forest"]._currentLocation.west);
                 }
                 else
                 {
-                    Console.WriteLine("What to do?! There's a dead end");
+                    Console.WriteLine("What to do?! There's a dead end...");
                 }
                 break;
- 
+
                 default:
                 Console.WriteLine("Oh Lord... You used some invalid input. Take another shot!");
-                //CheckCases();
                 break;
-            } 
+            }
         }
 
-        public static void Help()
+
+        public static void CheckEnemy()
         {
-            Console.WriteLine("You can use the following commands:"+ Environment.NewLine);
-            foreach(var command in GameData.commands){
-                Console.WriteLine(command);
+            foreach(var charac in GameData.characters.Values)
+            { 
+                if (charac._currentLocation == GameData.characters["Godess of the forest"]._currentLocation)
+                {
+                    string name = charac._name;
+                    switch(name)
+                    {
+                        case "Golem":
+                        _enemy = charac;
+                        isFightCase = true;
+                        Console.WriteLine("There's an enemy! You're getting attacked."+ Environment.NewLine/*+ enemyInfo +*/ + "Fight him!");
+                        CheckCases();
+
+                        break;
+
+                        case "King of death":
+                        _enemy = charac;
+                        isFightCase = true;
+                        Console.WriteLine("There's an enemy!"+ Environment.NewLine/*+ enemyInfo +*/ + "Fight him!");
+                        CheckCases();
+
+                        break;
+
+                        case "Dragon of the sea":
+                        Talk();
+                        CheckCases();
+                        break;
+
+                        default: //case Avatar
+                        CheckCases();
+                        break;
+                    }
+                }
             }
+        }
+
+        public static void Fight(GameData.Character enemycharac, string[] words)
+        {
+            words = _words;
+            enemycharac = _enemy;
+            switch(words[0])
+            {
+                case "f":
+                case "fight":
+                break;
+
+
+            }
+            enemycharac._lifepoints = enemycharac._lifepoints - GameData.characters["Godess of the forest"]._hitpoints;
+            Console.WriteLine("Damn! The enemy's still alive..." + enemycharac._lifepoints+ "");
         }
     }
 }
