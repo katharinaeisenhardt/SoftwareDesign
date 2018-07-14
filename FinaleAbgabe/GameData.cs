@@ -15,7 +15,7 @@ namespace FinaleAbgabe
 
 
         public static Dictionary<string, Room> rooms;
-        public static Dictionary<string, Item> items;
+        public static Dictionary<string, Character> characters;
 
         public class Room
         {
@@ -25,17 +25,12 @@ namespace FinaleAbgabe
             public Room east;
             public Room south;
             public Room west;
+            public List<Item> _roomInventory = new List<Item>();
 
             public Room(string name, string information)
             {
                 this._name = name;
                 this._information = information;
-            }
-
-            public static void RoomDescription(Room room)
-            {
-                room = GameData.characters["Godess of the forest"]._currentLocation;
-                Console.Write(room._information);
             }
         }
 
@@ -46,12 +41,26 @@ namespace FinaleAbgabe
                 "Silent Glade",
                 "You just arrived at the Silent Glade..."
             );
+            Gear Arrow = new Gear
+            (
+            "Arrow","gear","info",0.1F,false
+            );
+            Health Herb = new Health
+            (
+            "Herb","health","info",0.1F,"Heal!"
+            );
+            Glade._roomInventory.AddRange(new List<Item>(){Arrow, Herb});
 
             Room StoneQuarry = new Room
             (
                 "Brachial Stone Quarry",
                 "You just arrived at the Brachial Stone Quarry..."
             );
+            Gear Stone = new Gear
+            (
+            "Rock","gear","info",0.05F,false
+            );
+            StoneQuarry._roomInventory.Add(Stone);
 
             Room RabbitHole = new Room
             (
@@ -64,6 +73,11 @@ namespace FinaleAbgabe
                 "Sacred Sea",
                 "You just arrived at the bay of the Sacred Sea..."
             );
+            Health Potion = new Health
+            (
+            "Potion","health","info",0.3F,"Heal!"
+            );
+            Sea._roomInventory.Add(Potion);
 
             Room DeathValley = new Room
             (
@@ -92,7 +106,6 @@ namespace FinaleAbgabe
             rooms["Haunted Valley of Death"]= DeathValley;
         }
 
-
         public class Character
         {
             public string _name;
@@ -100,6 +113,7 @@ namespace FinaleAbgabe
             public float _hitpoints;
             public string _information;
             public Room _currentLocation;
+            public List<Item> _characterInventory = new List<Item>(); 
         }
 
         public class Avatar : Character
@@ -137,27 +151,32 @@ namespace FinaleAbgabe
                 this._currentLocation = currentLocation;
             }
         }
-        public static Dictionary<string, Character> characters;
+
         public static void CreateCharaters()
         {
 
             Avatar ForestGodess = new Avatar
             (
-            "Godess of the forest",
-            1F,
-            0.2F, 
-            "I'm the Godess of the forest. I'm your Avatar. Our Mission is to free the forest spirits from the tyrannic Deathking!", 
-            rooms["Silent Glade"]
+                "Godess of the forest",
+                1F,
+                0.2F, 
+                "I'm the Godess of the forest. I'm your Avatar. Our Mission is to free the forest spirits from the tyrannic Deathking!", 
+                rooms["Silent Glade"]
             );
 
             Enemy Golem = new Enemy
             (
-            "Golem", 
-            0.6F, 
-            0.15F, 
-            "GRRRRRR!", 
-            rooms["Dark Rabbit Hole"]
+                "Golem", 
+                0.6F, 
+                0.15F, 
+                "GRRRRRR!", 
+                rooms["Dark Rabbit Hole"]
             );
+            Gear Bow = new Gear
+            (
+                "Bow","gear","info",0.3F,false
+            );
+            Golem._characterInventory.Add(Bow);
 
             Enemy DeathKing = new Enemy
             (
@@ -170,11 +189,11 @@ namespace FinaleAbgabe
 
             Helper Dragon = new Helper
             (
-            "Dragon of the sea", 
-            1F, 
-            1F, 
-            "I'm the Dragon of the sea", 
-            rooms["Sacred Sea"]
+                "Dragon of the sea", 
+                1F, 
+                1F, 
+                "I'm the Dragon of the sea", 
+                rooms["Sacred Sea"]
             );
             
             characters = new Dictionary<string, Character>();
@@ -219,60 +238,6 @@ namespace FinaleAbgabe
                 this.lifepoints = _lifepoints;
                 this.placeholder = _placeholder;
             }
-        }
-        public static void CreateItems()
-        {
-            Gear Arrow = new Gear
-            (
-            "Arrow",
-            "gear",
-            "info",
-            0.1F,
-            false
-            );
-
-            Gear Bow = new Gear
-            (
-            "Bow",
-            "gear",
-            "info",
-            0.3F,
-            false
-            );
-
-            Gear Stone = new Gear
-            (
-            "Rocks",
-            "gear",
-            "info",
-            0.05F,
-            false
-            );
-           
-            Health Potion = new Health
-            (
-            "Potion",
-            "health",
-            "info",
-            0.3F,
-            "Heal!"
-            );
-            
-            Health Herb = new Health
-            (
-            "Potion",
-            "health",
-            "info",
-            0.1F,
-            "Heal!"
-            );
-
-            items = new Dictionary<string, Item>();
-            items["Arrow"] = Arrow;
-            items["Bow"] = Bow;
-            items["Rocks"] = Stone;
-            items["Potion"] = Potion;
-            items["Herb"] = Herb;
         }
     }
 }

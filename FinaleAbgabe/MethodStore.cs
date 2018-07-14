@@ -5,6 +5,7 @@ namespace FinaleAbgabe
 {
     class MethodStore
     {
+        public static GameData.Room AvatarCurrentLocation = GameData.characters["Godess of the forest"]._currentLocation;
         public static string[] _words;
         public static bool isFightCase = false;
 
@@ -18,6 +19,61 @@ namespace FinaleAbgabe
             Console.WriteLine(intro);
             GameData.CreateRooms();
             GameData.CreateCharaters();
+            Look(AvatarCurrentLocation);
+        }
+
+        public static void Look(GameData.Room room)
+        {
+            room = AvatarCurrentLocation;
+            Console.Write(room._information + Environment.NewLine);
+            if(room._roomInventory.Count != 0)
+            {
+                Console.Write("You see..."+ Environment.NewLine);
+                foreach(var item in room._roomInventory)
+                {
+                    Console.WriteLine("a/an " + item.name);
+                }
+            }
+            else
+            {
+                Console.WriteLine("There's nothing to find in this place.");
+            }
+        }
+
+        public static void Take(string input)
+        {
+            input = _words[1];
+            foreach(var item in AvatarCurrentLocation._roomInventory)
+            {
+                if(item.name == input)
+                {
+                    GameData.characters["Godess of the forest"]._characterInventory.Add(item);
+                }
+            }
+        }
+
+        public static void DisplayInventory()
+        {
+            Console.WriteLine("Take a look at your inventory:");
+            if(GameData.characters["Godess of the forest"]._characterInventory.Count > 0)
+            {
+                Console.WriteLine("-----------------------------------------------------------------------------------------------");
+                Console.WriteLine(String.Format("  {0,-10}  |  {1,-10}  |  {2,-30}  |  {3,-10}  |  {4,-10}  ", "Name", "Type", "Information", "Armed?", "Hit/Heal"));
+                Console.WriteLine("-----------------------------------------------------------------------------------------------");
+                foreach(var item in GameData.characters["Godess of the forest"]._characterInventory)
+                {
+                    Console.WriteLine(String.Format("  {0,-10}  |  {1,-10}  |  {2,-30}  |  {3,-10}  |  {4,-10}  ", item.name, item.type, item.information, 1, 1));
+                }
+                Console.WriteLine("-----------------------------------------------------------------------------------------------");
+            }
+            else
+            {
+                Console.WriteLine("Woops! Your inventory is empty...");
+            }
+        }
+
+        public static void Drop()
+        {
         }
 
         public static void Talk()
@@ -86,7 +142,7 @@ namespace FinaleAbgabe
 
                 case "i":
                 case "inventory":
-                //DisplayInventory();
+                DisplayInventory();
                 break;
 
                 case "q":
@@ -120,26 +176,26 @@ namespace FinaleAbgabe
 
                 case "l":
                 case "look":
-                GameData.Room.RoomDescription(GameData.characters["Godess of the forest"]._currentLocation);
+                Look(AvatarCurrentLocation);
                 break;
 
                 case "t":
                 case "take":
-                //DisplayInventory();
+                Take(_words[1]);
                 break;
 
                 case "d":
                 case "drop":
-                //Drop();
+                //Drop(_words[1]);
                 break;
 
                 case "n":
                 case "north":
-                if (GameData.characters["Godess of the forest"]._currentLocation.north != null)
+                if (AvatarCurrentLocation.north != null)
                 {
-                    GameData.characters["Godess of the forest"]._currentLocation = GameData.characters["Godess of the forest"]._currentLocation.north;
+                    AvatarCurrentLocation = AvatarCurrentLocation.north;
                     EnemyChangeRoom();
-                    GameData.Room.RoomDescription(GameData.characters["Godess of the forest"]._currentLocation);
+                    Look(AvatarCurrentLocation);
                 }
                 else
                 {
@@ -149,11 +205,11 @@ namespace FinaleAbgabe
 
                 case "e":
                 case "east":
-                if (GameData.characters["Godess of the forest"]._currentLocation.east != null)
+                if (AvatarCurrentLocation.east != null)
                 {
-                    GameData.characters["Godess of the forest"]._currentLocation = GameData.characters["Godess of the forest"]._currentLocation.east;
+                    AvatarCurrentLocation = AvatarCurrentLocation.east;
                     EnemyChangeRoom();
-                    GameData.Room.RoomDescription(GameData.characters["Godess of the forest"]._currentLocation);
+                    Look(AvatarCurrentLocation);
                 }
                 else
                 {
@@ -163,11 +219,11 @@ namespace FinaleAbgabe
 
                 case "s":
                 case "south":
-                if (GameData.characters["Godess of the forest"]._currentLocation.south != null)
+                if (AvatarCurrentLocation.south != null)
                 {
-                    GameData.characters["Godess of the forest"]._currentLocation = GameData.characters["Godess of the forest"]._currentLocation.south;
+                    AvatarCurrentLocation = AvatarCurrentLocation.south;
                     EnemyChangeRoom();
-                    GameData.Room.RoomDescription(GameData.characters["Godess of the forest"]._currentLocation);
+                    Look(AvatarCurrentLocation);
                 }
                 else
                 {
@@ -177,11 +233,11 @@ namespace FinaleAbgabe
 
                 case "w":
                 case "west":
-                if (GameData.characters["Godess of the forest"]._currentLocation.west != null)
+                if (AvatarCurrentLocation.west != null)
                 {
-                    GameData.characters["Godess of the forest"]._currentLocation = GameData.characters["Godess of the forest"]._currentLocation.west;
+                    AvatarCurrentLocation = AvatarCurrentLocation.west;
                     EnemyChangeRoom();
-                    GameData.Room.RoomDescription(GameData.characters["Godess of the forest"]._currentLocation.west);
+                    Look(AvatarCurrentLocation.west);
                 }
                 else
                 {
@@ -234,7 +290,7 @@ namespace FinaleAbgabe
         {
             foreach(var charac in GameData.characters.Values)
             { 
-                if (charac._currentLocation == GameData.characters["Godess of the forest"]._currentLocation)
+                if (charac._currentLocation == AvatarCurrentLocation)
                 {
                     string name = charac._name;
                     switch(name)
