@@ -161,7 +161,7 @@ namespace FinaleAbgabe
                 "King of death",
                 1F,
                 0.3F,
-                "GRRRR! I'm the King of death! Weak as ever, you might as well just die!",
+                "GRRRR! I'm the King of death! You Peasant! Weak as ever, you might as well just die!",
                 rooms["Haunted Valley of Death"]
             );
 

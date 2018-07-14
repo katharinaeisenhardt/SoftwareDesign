@@ -10,6 +10,8 @@ namespace FinaleAbgabe
 
         public static GameData.Character _enemy;
 
+        public static int characterNumber;
+
         public static void GameIntroduction()
         {
             string intro = "Welcome adventurer! You just entered the sacred forest of Dzed..."/*+Avatar.information*/;
@@ -92,9 +94,6 @@ namespace FinaleAbgabe
                 //QuitGame();
                 break;
 
-                /* 
-                    Console.WriteLine("You can't fight like this! Try another input. Valid inputs are: [arm/a <item>] [use/u <item>] [inventory/i] [quit/q] and [fight/f] while fighting");
-                    */
                 default:
                 if(isFightCase == true)
                 {
@@ -121,8 +120,7 @@ namespace FinaleAbgabe
 
                 case "l":
                 case "look":
-                Console.WriteLine("in loook");
-                //Arm(string [_words[1]] input);
+                GameData.Room.RoomDescription(GameData.characters["Godess of the forest"]._currentLocation);
                 break;
 
                 case "t":
@@ -140,7 +138,7 @@ namespace FinaleAbgabe
                 if (GameData.characters["Godess of the forest"]._currentLocation.north != null)
                 {
                     GameData.characters["Godess of the forest"]._currentLocation = GameData.characters["Godess of the forest"]._currentLocation.north;
-                    // EnemyChangeRoom()
+                    EnemyChangeRoom();
                     GameData.Room.RoomDescription(GameData.characters["Godess of the forest"]._currentLocation);
                 }
                 else
@@ -154,6 +152,7 @@ namespace FinaleAbgabe
                 if (GameData.characters["Godess of the forest"]._currentLocation.east != null)
                 {
                     GameData.characters["Godess of the forest"]._currentLocation = GameData.characters["Godess of the forest"]._currentLocation.east;
+                    EnemyChangeRoom();
                     GameData.Room.RoomDescription(GameData.characters["Godess of the forest"]._currentLocation);
                 }
                 else
@@ -167,6 +166,7 @@ namespace FinaleAbgabe
                 if (GameData.characters["Godess of the forest"]._currentLocation.south != null)
                 {
                     GameData.characters["Godess of the forest"]._currentLocation = GameData.characters["Godess of the forest"]._currentLocation.south;
+                    EnemyChangeRoom();
                     GameData.Room.RoomDescription(GameData.characters["Godess of the forest"]._currentLocation);
                 }
                 else
@@ -180,6 +180,7 @@ namespace FinaleAbgabe
                 if (GameData.characters["Godess of the forest"]._currentLocation.west != null)
                 {
                     GameData.characters["Godess of the forest"]._currentLocation = GameData.characters["Godess of the forest"]._currentLocation.west;
+                    EnemyChangeRoom();
                     GameData.Room.RoomDescription(GameData.characters["Godess of the forest"]._currentLocation.west);
                 }
                 else
@@ -194,6 +195,40 @@ namespace FinaleAbgabe
             }
         }
 
+        public static void EnemyChangeRoom()
+        {
+            List<GameData.Room> allRooms = new List<GameData.Room>(GameData.rooms.Values);
+            Random rand = new Random();
+            int randomIndex = rand.Next(allRooms.Count);
+            GameData.characters["Golem"]._currentLocation = allRooms[randomIndex];
+            CountCharacterNumber();
+        }
+        public static void CountCharacterNumber()
+        {
+            List<string> currentRooms = new List<string>();
+            foreach(var character in GameData.characters)
+            {
+                currentRooms.Add(character.Value._currentLocation._name);
+            }
+            List<string> sublist = currentRooms.FindAll(IsInList);
+            characterNumber = sublist.Count;
+            
+            if(characterNumber >= 2)
+            {
+                EnemyChangeRoom();
+            }
+        }
+
+        public static bool IsInList(string s)
+        {
+            if(s == GameData.characters["Golem"]._currentLocation._name)
+            {
+                return true;
+            }
+            else{
+                return false;
+            }
+        }
 
         public static void CheckEnemy()
         {
@@ -207,19 +242,17 @@ namespace FinaleAbgabe
                         case "Golem":
                         _enemy = charac;
                         isFightCase = true;
-                        Console.WriteLine("There's an enemy! You're getting attacked."+ Environment.NewLine/*+ enemyInfo +*/ + "Fight him!");
+                        Console.WriteLine("There's an enemy! You're getting attacked."+ Environment.NewLine + "Fight him!");
                         CheckCases();
                         CheckCases();
-
                         break;
 
                         case "King of death":
                         _enemy = charac;
                         isFightCase = true;
-                        Console.WriteLine("There's an enemy!"+ Environment.NewLine/*+ enemyInfo +*/ + "Fight him!");
+                        Console.WriteLine("There's a pressuring killing intent..."+ Environment.NewLine + "Before you stands the King of death! Defeat him to complete the mission and free the spirits of the tyranny!");
                         CheckCases();
                         //quitgame();
-
                         break;
 
                         case "Dragon of the sea":
@@ -227,7 +260,7 @@ namespace FinaleAbgabe
                         CheckCases();
                         break;
 
-                        default: //case Avatar
+                        default: 
                         CheckCases();
                         break;
                     }
@@ -246,11 +279,11 @@ namespace FinaleAbgabe
                 enemycharac._lifepoints = (float)(Math.Round((enemycharac._lifepoints - GameData.characters["Godess of the forest"]._hitpoints), 2));
                 if(enemycharac._lifepoints > 0F)
                 {
-                    Console.WriteLine("Woooo!!!" + Environment.NewLine +"Damn! The " + enemycharac._name + "'s still alive...He still has got" + enemycharac._lifepoints + "lifepoints.");
+                    Console.WriteLine("Woooo!!!" + Environment.NewLine +"Damn! The " + enemycharac._name + "'s still alive...He still has got " + enemycharac._lifepoints + " lifepoints.");
                     GameData.characters["Godess of the forest"]._lifepoints = (float)(Math.Round((GameData.characters["Godess of the forest"]._lifepoints - enemycharac._hitpoints), 2));
                     if(GameData.characters["Godess of the forest"]._lifepoints > 0F)
                     {
-                        Console.WriteLine("Oouuuch! Augh!!! Oh, you dirty creature! I'm gonna finish you on the spot!" + Environment.NewLine + " You've got " + GameData.characters["Godess of the forest"]._lifepoints + "lifepoints. Fight him 'till the end!");
+                        Console.WriteLine("Oouuuch! Augh!!! Oh, you dirty creature! I'm gonna finish you on the spot!" + Environment.NewLine + "You've got " + GameData.characters["Godess of the forest"]._lifepoints + " lifepoints left. Fight him 'till the end!");
                         CheckCases();
                     }
                     else
@@ -272,7 +305,7 @@ namespace FinaleAbgabe
                 GameData.characters["Godess of the forest"]._lifepoints = (float)(Math.Round((GameData.characters["Godess of the forest"]._lifepoints - enemycharac._hitpoints), 2));
                 if(GameData.characters["Godess of the forest"]._lifepoints > 0F)
                 {
-                    Console.WriteLine("Oouuuch! Augh!!! Oh, you dirty creature! I'm gonna finish you on the spot!" + Environment.NewLine + " You've got " + GameData.characters["Godess of the forest"]._lifepoints + "lifepoints. Fight him 'till the end!");
+                    Console.WriteLine("Oouuuch! Augh!!! Oh, you dirty creature! I'm gonna finish you on the spot!" + Environment.NewLine + "You've got " + GameData.characters["Godess of the forest"]._lifepoints + " lifepoints left. Fight him 'till the end!");
                     Console.WriteLine("You can't fight like this! Try another input. Valid inputs are: [fight/f] [arm/a <item>] [use/u <item>] [inventory/i] and [quit/q]");
                     CheckCases();
                 }

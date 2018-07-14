@@ -20,10 +20,11 @@ namespace FinaleAbgabe
             /* MethodStore.SplitInput("hallo Maria!"); */ 
           
             MethodStore.GameIntroduction();
-            for (;;)
+            /*for (;;)
             {
                 MethodStore.CheckEnemy();
-            }
+            }*/
+            MethodStore.EnemyChangeRoom();
         }
     }
 }
