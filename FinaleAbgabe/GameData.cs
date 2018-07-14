@@ -13,7 +13,9 @@ namespace FinaleAbgabe
             "[quit/q]"
         };
 
+
         public static Dictionary<string, Room> rooms;
+        public static Dictionary<string, Item> items;
 
         public class Room
         {
@@ -89,6 +91,7 @@ namespace FinaleAbgabe
             rooms["Sacred Sea"] = Sea;
             rooms["Haunted Valley of Death"]= DeathValley;
         }
+
 
         public class Character
         {
@@ -173,13 +176,103 @@ namespace FinaleAbgabe
             "I'm the Dragon of the sea", 
             rooms["Sacred Sea"]
             );
-
             
             characters = new Dictionary<string, Character>();
             characters["Godess of the forest"] = ForestGodess;
             characters["Golem"] = Golem;
             characters["King of death"] = DeathKing;
             characters["Dragon of the sea"] = Dragon;
+        }
+
+        public class Item
+        {
+            public string name;
+            public string type;
+            public string information;
+        }
+
+        public class Gear : Item
+        {
+            public float hitpoints;
+            public bool isArmed;
+
+            public Gear (string _name, string _type, string _information, float _hitpoints, bool _isArmed)
+            {
+                this.name = _name;
+                this.type = _type;
+                this.information = _information;
+                this.hitpoints = _hitpoints;
+                this.isArmed = _isArmed;
+            }
+        }
+
+        public class Health : Item
+        {
+            public float lifepoints;
+            public string placeholder;
+
+            public Health (string _name, string _type, string _information, float _lifepoints, string _placeholder)
+            {
+                this.name = _name;
+                this.type = _type;
+                this.information = _information;
+                this.lifepoints = _lifepoints;
+                this.placeholder = _placeholder;
+            }
+        }
+        public static void CreateItems()
+        {
+            Gear Arrow = new Gear
+            (
+            "Arrow",
+            "gear",
+            "info",
+            0.1F,
+            false
+            );
+
+            Gear Bow = new Gear
+            (
+            "Bow",
+            "gear",
+            "info",
+            0.3F,
+            false
+            );
+
+            Gear Stone = new Gear
+            (
+            "Rocks",
+            "gear",
+            "info",
+            0.05F,
+            false
+            );
+           
+            Health Potion = new Health
+            (
+            "Potion",
+            "health",
+            "info",
+            0.3F,
+            "Heal!"
+            );
+            
+            Health Herb = new Health
+            (
+            "Potion",
+            "health",
+            "info",
+            0.1F,
+            "Heal!"
+            );
+
+            items = new Dictionary<string, Item>();
+            items["Arrow"] = Arrow;
+            items["Bow"] = Bow;
+            items["Rocks"] = Stone;
+            items["Potion"] = Potion;
+            items["Herb"] = Herb;
         }
     }
 }
