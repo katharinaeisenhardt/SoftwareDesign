@@ -8,6 +8,8 @@ namespace FinalFiAbgabe
         public static Dictionary<string, Room> Rooms;
         public static Dictionary<string, Character> Characters;
         public static Dictionary<string, Item> Items = new Dictionary<string, Item>();
+        
+        public static int CharacterNumber;
 
         public class Room
         {
@@ -50,7 +52,7 @@ namespace FinalFiAbgabe
             );
             Gear Stone = new Gear
             (
-            "Rock","You can use me to provoke an enemy or to throw me!","info",0.05F,false
+            "Rock", "gear", "You can use me to provoke an enemy or to throw me!", 0.05F, false
             );
             StoneQuarry.RoomInventory.Add(Stone);
 
@@ -114,6 +116,76 @@ namespace FinalFiAbgabe
             public List<Item> CharacterInventory = new List <Item>();
         }
 
+        public class Avatar : Character
+        {
+            public Avatar(string name, float lifepoints, float hitpoints, string information, Room currentLocation)
+            {
+                this.Name = name;
+                this.Lifepoints = lifepoints;
+                this.Hitpoints = hitpoints;
+                this.Information = information;
+                this.CurrentLocation = currentLocation;
+            }
+
+            public static void Fight(Character enemy, string[] input)
+            {
+                Character godess = Characters["Godess of the forest"];
+                input = MethodStore.Words;
+                enemy = MethodStore.Enemy;
+                switch (input[0])
+                {
+                    case "f":
+                    case "fight":
+                    enemy.Lifepoints = (float)(Math.Round((enemy.Lifepoints - godess.Hitpoints), 2));
+                    if (enemy.Lifepoints > 0F)
+                    {
+                        Console.WriteLine("Woooo!!!" + Environment.NewLine +"Damn! The " + enemy.Name + "'s still alive...He still has got " + enemy.Lifepoints + " lifepoints.");
+                        godess.Lifepoints = (float)(Math.Round((godess.Lifepoints - MethodStore.Enemy.Hitpoints), 2));
+
+                        if (godess.Lifepoints > 0F)
+                        {
+                            Console.WriteLine("You're getting hit!"+ Environment.NewLine + "Oouuuch! Augh!!! Oh, you dirty creature! I'm gonna finish you on the spot!" + Environment.NewLine + "You've got " + godess.Lifepoints + " lifepoints left. Fight him 'till the end!");
+                        }
+                        else
+                        {
+                            Console.WriteLine("NOOOOOOOO! How could you! Now you're dead! Stupid! Try this game again...");
+                            MethodStore.QuitGame();
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("Wahhh! Nooo!!!" + Environment.NewLine +"Congratulations, great adventurer! You slayed the " + enemy.Name + "! Awesome!");
+                        if (enemy.CharacterInventory.Count != 0)
+                        {
+                            godess.CharacterInventory.Add(enemy.CharacterInventory[0]);
+                            enemy.CharacterInventory.Remove(enemy.CharacterInventory[0]);
+                            Console.WriteLine("Awesome! You snatched the enemy's inventory!");
+                        }
+                        MethodStore.IsFighting = false;
+                        enemy.Lifepoints = 1F;
+                    }
+                    MethodStore.CheckCases();
+                    break;
+
+                    default:
+                    Console.WriteLine("Ohhh little one! You're far too slow for this. It's kind of impossible...");
+                    godess.Lifepoints = (float)(Math.Round((godess.Lifepoints - MethodStore.Enemy.Hitpoints), 2));
+                    if (godess.Lifepoints > 0F && MethodStore.Enemy.Lifepoints > 0F)
+                    {
+                        Console.WriteLine("You're getting hit!"+ Environment.NewLine +"Oouuuch! Augh!!! Oh, you dirty creature! I'm gonna finish you on the spot!" + Environment.NewLine + "You've got " + godess.Lifepoints + " lifepoints left. Fight him 'till the end!");
+                        Console.WriteLine("You can't fight like this! Try another input. Valid inputs are: [fight/f] [arm/a <item>] [use/u <item>] [inventory/i] and [quit/q]");
+                        MethodStore.CheckCases();
+                    }
+                    else
+                    {
+                        Console.WriteLine("NOOOOOOOO! How could you! Now you're dead! Stupid! Try this game again...");
+                       MethodStore.QuitGame();
+                    }
+                    break;
+                }
+            }
+        }
+
         public class Enemy : Character
         {
             public Enemy(string name, float lifepoints, float hitpoints, string information, Room currentLocation)
@@ -124,17 +196,52 @@ namespace FinalFiAbgabe
                 this.Information = information;
                 this.CurrentLocation = currentLocation;
             }
-        }
 
-        public class Avatar : Character
-        {
-            public Avatar(string name, float lifepoints, float hitpoints, string information, Room currentLocation)
+            public static void EnemyChangeRoom()
             {
-                this.Name = name;
-                this.Lifepoints = lifepoints;
-                this.Hitpoints = hitpoints;
-                this.Information = information;
-                this.CurrentLocation = currentLocation;
+                MethodStore.InteractionCounter = 0;
+                List<Room> _allRooms = new List<Room>(Rooms.Values);
+                try
+                {
+                    Random rand = new Random();
+                    int randomIndex = rand.Next(_allRooms.Count);
+                    Characters["Golem"].CurrentLocation = _allRooms[randomIndex];
+                    CountCharacterNumber();
+                }
+                catch
+                {
+                    Console.WriteLine("Exeption handle.");
+                }
+            }
+
+            public static void CountCharacterNumber()
+            {
+                List<string> _currentRooms = new List<string>();
+
+                foreach (var _character in Characters)
+                {
+                    _currentRooms.Add(_character.Value.CurrentLocation.Name);
+                }
+
+                List<string> _sublist = _currentRooms.FindAll(isInList);
+                CharacterNumber = _sublist.Count;
+
+                if (CharacterNumber >= 2)
+                {
+                    EnemyChangeRoom();
+                }
+            }
+
+            public static bool isInList(string _s)
+            {
+                if (_s == Characters["Golem"].CurrentLocation.Name)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
         }
 
@@ -147,6 +254,62 @@ namespace FinalFiAbgabe
                 this.Hitpoints = hitpoints;
                 this.Information = information;
                 this.CurrentLocation = currentLocation;
+            }
+
+            public static void Talk()
+            {
+                Console.WriteLine(Characters["Dragon of the sea"].Information + " I have some good advice for you..." + Environment.NewLine + "In the north you will find the strongest person in this world! At least the strongest enemy." + Environment.NewLine +"Allow me to ask you a question: 'Did you take the chance to slay a Golem yet?'");
+                
+                string _input = Console.ReadLine().ToLower();
+                switch (_input)
+                {
+                    case "y":
+                    case "yes":
+                    Console.WriteLine("Excellent, my mighty warrior. Go now and fulfill your fate on the darkest path in the north!");
+                    break;
+
+                    case "n":
+                    case "no":
+                    Console.WriteLine("Ohhh little one! You might want to go back and equip yourself to be the strongest monster slayer ever...");
+                    break;
+
+                    case "q":
+                    case "quit":
+                    MethodStore.QuitGame();
+                    break;
+
+                    default:
+                    Console.WriteLine("I'm sorry little one... I could not understand you. Please try again and answer with [yes/y] or [no/n].");
+                    TalkCases();
+                    break;
+                }
+            }
+
+            public static void TalkCases()
+            {
+                string _input = Console.ReadLine().ToLower();
+                switch (_input)
+                {
+                    case "y":
+                    case "yes":
+                    Console.WriteLine("Excellent, my mighty warrior. Go now and fulfill your fate on the darkest path in the north!");
+                    break;
+
+                    case "n":
+                    case "no":
+                    Console.WriteLine("Ohhh little one! You might want to go back and equip yourself to be the strongest monster slayer ever...");
+                    break;
+
+                    case "q":
+                    case "quit":
+                    MethodStore.QuitGame();
+                    break;
+
+                    default:
+                    Console.WriteLine("I'm sorry little one... I could not understand you. Please try again and answer with [yes/y] or [no/n].");
+                    TalkCases();
+                    break;
+                }
             }
         }
 
@@ -171,7 +334,7 @@ namespace FinalFiAbgabe
             );
              Gear Bow = new Gear
             (
-                "Bow", "Gear", "You can use me to strike an enemy or shoot an arrow!", 0.3F, false
+                "Bow", "gear", "You can use me to strike an enemy or shoot an arrow!", 0.3F, false
             );
             Golem.CharacterInventory.Add(Bow);
 
@@ -209,6 +372,48 @@ namespace FinalFiAbgabe
             public string Information;
             public float Points;
             public bool IsArmed;
+
+            public static void Use(string input)
+            {
+                Character godess = Characters["Godess of the forest"];
+                input = MethodStore.Words[1];
+                Item foundItem = godess.CharacterInventory.Find(x => x.Name.ToLower().Contains(input));
+                if (foundItem != null)
+                {
+                    switch (foundItem.Type)
+                    {
+                        case "Gear":
+                        if(foundItem.IsArmed == false)
+                        {
+                            if (MethodStore.IsFighting == true && MethodStore.Enemy.Lifepoints > 0 && godess.Lifepoints > 0)
+                            {
+                                godess.Hitpoints =  (float)(Math.Round((godess.Hitpoints + foundItem.Points), 2));
+                                Console.WriteLine("You got temporarily stronger with the help of the " + foundItem.Name + ".");
+                                Characters["Golem"].Lifepoints = (float)(Math.Round((Characters["Golem"].Lifepoints - godess.Hitpoints), 2));
+                                Console.WriteLine("Ouch!!!  Golem's lifepoints: " + Characters["Golem"].Lifepoints);
+                                godess.Hitpoints = (float)(Math.Round((godess.Hitpoints - foundItem.Points), 2));
+                                godess.Lifepoints = (float)(Math.Round((godess.Lifepoints - MethodStore.Enemy.Hitpoints), 2));
+                                Console.WriteLine("You're getting hit!"+ Environment.NewLine + "Oouuuch! Augh!!! Oh, you dirty creature! I'm gonna finish you on the spot!" + Environment.NewLine + "You've got " + godess.Lifepoints + " lifepoints left. Fight him 'till the end!");
+                            }
+                            else
+                                Console.WriteLine("There's no enemy to fight! Try another time.");
+                        }
+                        else
+                            Console.WriteLine("You're already equipped with " + foundItem.Name);
+                        break;
+
+                        case "Health":
+                            godess.Lifepoints =  (float)(Math.Round((godess.Lifepoints + foundItem.Points), 2));
+                            Console.WriteLine("You used the healing item, new lifepoints: " + godess.Lifepoints);
+                            godess.CharacterInventory.Remove(foundItem);
+                        break;
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Invalid item!");
+                }
+            }
         }
 
         public class Health : Item
@@ -231,6 +436,39 @@ namespace FinalFiAbgabe
                 this.Information = information;
                 this.Points = hitpoints;
                 this.IsArmed = isArmed;
+            }
+
+            public static void Arm(string input)
+            {
+                Character godess = Characters["Godess of the forest"];
+                input = MethodStore.Words[1];
+                Item foundItem = godess.CharacterInventory.Find(x => x.Name.ToLower().Contains(input));
+                if (foundItem != null)
+                {
+                    switch (foundItem.Type)
+                    {
+                        case "gear":
+                        if(foundItem.IsArmed == false)
+                        {
+                            godess.Hitpoints =  (float)(Math.Round((godess.Hitpoints + foundItem.Points), 2));
+                            foundItem.IsArmed = true;
+                            Console.WriteLine("You successfully equipped the " + foundItem.Name + ", new hitpoints: " + godess.Hitpoints);
+                        }
+                        else
+                        {
+                            Console.WriteLine("You're already equipped with " + foundItem.Name);
+                        }
+                        break;
+
+                        case "health":
+                            Console.WriteLine("Health item! You can not equip this stuff... Try to use it damnit!");
+                        break;
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Invalid item!");
+                }
             }
         }
     }

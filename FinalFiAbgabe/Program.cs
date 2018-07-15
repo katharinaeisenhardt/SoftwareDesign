@@ -7,7 +7,7 @@ namespace FinalFiAbgabe
     {
         static void Main(string[] args)
         {
-            MethodStore.GameIntro();
+            MethodStore.LoadGameData();
             for (;;)
             {
                 MethodStore.CheckCharacters(); 
