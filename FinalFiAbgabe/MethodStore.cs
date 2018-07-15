@@ -15,11 +15,29 @@ namespace FinalFiAbgabe
 
         public static void GameIntro()
         {
-            string _intro = "Welcome adventurer! You just entered the sacred forest of Dzed..." + Environment.NewLine + Godess.Information;
-            Console.WriteLine(_intro);
             GameData.CreateRooms();
             GameData.CreateCharaters();
+            string _intro = "Welcome adventurer! You just entered the sacred forest of Dzed..." + Environment.NewLine + Godess.Information;
+            Console.WriteLine(_intro);
             Look(AvatarCurrentRoom);
+        }
+
+        public static void Look(GameData.Room _room)
+        {
+            _room = AvatarCurrentRoom;
+            Console.WriteLine(_room.Information);
+            if (_room.RoomInventory.Count != 0)
+            {
+                Console.WriteLine("You see..."+ Environment.NewLine);
+                foreach (var item in _room.RoomInventory)
+                {
+                    Console.WriteLine("a/an " + item.Name);
+                }
+            }
+            else
+            {
+                Console.WriteLine("There's nothing to find in this place.");
+            }
         }
 
         public static void CheckCharacters()
@@ -59,12 +77,9 @@ namespace FinalFiAbgabe
                         }
                         CheckCases();
                         break;
-
-                        default:
-                        CheckCases();
-                        break;
                     }
                 }
+                CheckCases();
             }
         }
 
@@ -117,7 +132,7 @@ namespace FinalFiAbgabe
             {
                 case "u":
                 case "use":
-                //Use(Words[1]);
+                Use(Words[1]);
                 break;
 
                 case "a":
@@ -156,7 +171,7 @@ namespace FinalFiAbgabe
             {
                 switch (foundItem.Type)
                 {
-                    case "gear":
+                    case "Gear":
                     if(foundItem.IsArmed == false)
                     {
                         if (IsFightCase == true && Enemy.Lifepoints > 0 && Godess.Lifepoints > 0)
@@ -176,7 +191,7 @@ namespace FinalFiAbgabe
                         Console.WriteLine("You're already equipped with " + foundItem.Name);
                     break;
 
-                    case "health":
+                    case "Health":
                         Godess.Lifepoints =  (float)(Math.Round((Godess.Lifepoints + foundItem.Points), 2));
                         Console.WriteLine("You used the healing item, new lifepoints: " + Godess.Lifepoints);
                         Godess.CharacterInventory.Remove(foundItem);
@@ -270,7 +285,6 @@ namespace FinalFiAbgabe
                         Console.WriteLine("NOOOOOOOO! How could you! Now you're dead! Stupid! Try this game again...");
                         QuitGame();
                     }
-
                 }
                 else
                 {
@@ -279,7 +293,7 @@ namespace FinalFiAbgabe
                     {
                         Godess.CharacterInventory.Add(_enemy.CharacterInventory[0]);
                         _enemy.CharacterInventory.Remove(_enemy.CharacterInventory[0]);
-                        Console.WriteLine("Awesome! You snatched the {0}", _enemy.CharacterInventory[0]);
+                        Console.WriteLine("Awesome! You snatched the enemy's inventory!");
                     }
                     IsFightCase = false;
                     _enemy.Lifepoints = 1F;
@@ -290,7 +304,7 @@ namespace FinalFiAbgabe
                 default:
                 Console.WriteLine("Ohhh little one! You're far too slow for this. It's kind of impossible...");
                 Godess.Lifepoints = (float)(Math.Round((Godess.Lifepoints - Enemy.Hitpoints), 2));
-                if (Godess.Lifepoints > 0F)
+                if (Godess.Lifepoints > 0F && Enemy.Lifepoints > 0F)
                 {
                     Console.WriteLine("You're getting hit!"+ Environment.NewLine +"Oouuuch! Augh!!! Oh, you dirty creature! I'm gonna finish you on the spot!" + Environment.NewLine + "You've got " + Godess.Lifepoints + " lifepoints left. Fight him 'till the end!");
                     Console.WriteLine("You can't fight like this! Try another input. Valid inputs are: [fight/f] [arm/a <item>] [use/u <item>] [inventory/i] and [quit/q]");
@@ -409,31 +423,6 @@ namespace FinalFiAbgabe
             "[quit/q]"
         };
 
-        public static void Look(GameData.Room _room)
-        {
-            _room = AvatarCurrentRoom;
-            Console.WriteLine(_room.Information + Environment.NewLine);
-            try
-            {
-                if (_room.RoomInventory.Count != 0)
-                {
-                    Console.WriteLine("You see..."+ Environment.NewLine);
-                    foreach (var item in _room.RoomInventory)
-                    {
-                        Console.WriteLine("a/an " + item.Name);
-                    }
-                }
-                else
-                {
-                    Console.WriteLine("There's nothing to find in this place.");
-                }
-            }
-            catch
-            {
-                Console.WriteLine("Exception Handle");
-            }
-        }
-
         public static void Take(string _input)
         {
             _input = Words[1];
@@ -474,7 +463,7 @@ namespace FinalFiAbgabe
             {
                 Random rand = new Random();
                 int randomIndex = rand.Next(_allRooms.Count);
-                GameData.Characters["Goyl"].CurrentLocation = _allRooms[randomIndex];
+                GameData.Characters["Golem"].CurrentLocation = _allRooms[randomIndex];
                 CountCharacterNumber();
             }
             catch
@@ -503,7 +492,7 @@ namespace FinalFiAbgabe
 
         public static bool isInList(string _s)
         {
-            if (_s == GameData.Characters["Goyl"].CurrentLocation.Name)
+            if (_s == GameData.Characters["Golem"].CurrentLocation.Name)
             {
                 return true;
             }

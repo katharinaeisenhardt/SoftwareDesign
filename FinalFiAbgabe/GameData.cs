@@ -30,8 +30,8 @@ namespace FinalFiAbgabe
         {
             Room Glade = new Room
             (
-                "Silent Glade",
-                "You just arrived at the Silent Glade..."
+                "Silent Wood Glade",
+                "You just arrived at the Silent Wood Glade..."
             );
             Gear Arrow = new Gear
             (
@@ -157,7 +157,7 @@ namespace FinalFiAbgabe
             "Godess of the forest",
             1F, 
             0.2F, 
-            "I'm the " +  Characters["Godess of the forest"].Name + " I'm your Avatar."+Environment.NewLine+"Our Mission is to free the forest spirits from the tyrannic Deathking!",
+            "I'm the Godess of the forest! I'm your Avatar."+Environment.NewLine+"Our Mission is to free the forest spirits from the tyrannic King of death!",
             Rooms["Silent Wood Glade"]
             );
 
@@ -166,7 +166,7 @@ namespace FinalFiAbgabe
             "Golem", 
             0.6F, 
             0.1F, 
-            "GRRRRRR! "+ Characters["Golem"].Name + " GRRRRRR!", 
+            "GRRRRRR! Golem... GRRRRRR!", 
             Rooms["Dark Rabbit Hole"]
             );
              Gear Bow = new Gear
@@ -180,7 +180,7 @@ namespace FinalFiAbgabe
             "King of death", 
             1F, 
             0.3F, 
-            "GRRRR! I'm the " + Characters["King of death"].Name + "! You Peasant! Weak as ever, you might as well just die!", 
+            "GRRRR! I'm the King of death! You Peasant! Weak as ever, you might as well just die!", 
             Rooms["Haunted Valley of Death"]
             );
 
@@ -189,7 +189,7 @@ namespace FinalFiAbgabe
             "Dragon of the sea", 
             1F, 
             1F, 
-            "Hiss, huff and puff!!! Greetings, brave adventurer. I'm the " +Characters["Dragon of the sea"].Name +". Hiss, huff and puff!!!",  
+            "Hiss, huff and puff... Greetings, brave adventurer. I'm the Dragon of the sea! Hiss, huff and puff...",  
             Rooms["Sacred Sea"]
             );
 

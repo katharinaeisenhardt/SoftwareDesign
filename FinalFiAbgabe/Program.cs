@@ -8,14 +8,10 @@ namespace FinalFiAbgabe
         static void Main(string[] args)
         {
             MethodStore.GameIntro();
-            
             for (;;)
             {
-                MethodStore.CheckCharacters();   
+                MethodStore.CheckCharacters(); 
             } 
-            
-            //MethodStore.DisplayInventory();
-            //Console.WriteLine(GameData.characters["Goyl"]._characterInventory);
         }
     }
 }
