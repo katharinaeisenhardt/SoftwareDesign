@@ -11,7 +11,7 @@ namespace FinalFiAbgabe
             for (;;)
             {
                 MethodStore.CheckCharactersInRoom(); 
-                MethodStore.CheckCases();
+                MethodStore.InputPrompt();
             } 
         }
     }

@@ -59,17 +59,17 @@ namespace FinalFiAbgabe
                             Enemy = character;
                             IsFighting = true;
                             Console.WriteLine("There's an enemy! You're getting attacked."+ Environment.NewLine + "Fight him!");
-                            CheckCases();
+                            InputPrompt();
                             InteractionCounter++;
                         }
-                        CheckCases();
+                        InputPrompt();
                         break;
 
                         case "King of death":
                         Enemy = character;
                         IsFighting = true;
                         Console.WriteLine("There's a pressuring killing intent..."+ Environment.NewLine + "Before you stands the King of death! Defeat him to complete the mission and free the spirits of the tyranny!");
-                        CheckCases();
+                        InputPrompt();
                         QuitGame();
                         break;
 
@@ -79,18 +79,18 @@ namespace FinalFiAbgabe
                             GameData.Helper.Talk();
                             InteractionCounter++;
                         }
-                        CheckCases();
+                        InputPrompt();
                         break;
 
                         default:
-                        CheckCases();
+                        InputPrompt();
                         break;
                     }
                 }
             }
         }
 
-        public static void CheckCases()
+        public static void InputPrompt()
         {
             Console.WriteLine("What would you like to do?");
             string _input = Console.ReadLine().ToLower();

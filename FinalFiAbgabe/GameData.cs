@@ -164,7 +164,7 @@ namespace FinalFiAbgabe
                         MethodStore.IsFighting = false;
                         enemy.Lifepoints = 1F;
                     }
-                    MethodStore.CheckCases();
+                    MethodStore.InputPrompt();
                     break;
 
                     default:
@@ -174,7 +174,7 @@ namespace FinalFiAbgabe
                     {
                         Console.WriteLine("You're getting hit!"+ Environment.NewLine +"Oouuuch! Augh!!! Oh, you dirty creature! I'm gonna finish you on the spot!" + Environment.NewLine + "You've got " + godess.Lifepoints + " lifepoints left. Fight him 'till the end!");
                         Console.WriteLine("You can't fight like this! Try another input. Valid inputs are: [fight/f] [arm/a <item>] [use/u <item>] [inventory/i] and [quit/q]");
-                        MethodStore.CheckCases();
+                        MethodStore.InputPrompt();
                     }
                     else
                     {
