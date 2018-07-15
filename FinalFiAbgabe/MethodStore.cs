@@ -70,6 +70,7 @@ namespace FinalFiAbgabe
                         IsFighting = true;
                         Console.WriteLine("There's a pressuring killing intent..."+ Environment.NewLine + "Before you stands the King of death! Defeat him to complete the mission and free the spirits of the tyranny!");
                         InputPrompt();
+                        Console.WriteLine("You did it and freed all the spirits! It's party time!");
                         QuitGame();
                         break;
 
