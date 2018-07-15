@@ -21,8 +21,8 @@ namespace FinalFiAbgabe
 
         public static void GameIntroduction()
         {
-            string _intro = "Welcome adventurer! You just entered the sacred forest of Dzed..." + Environment.NewLine + Godess.Information;
-            Console.WriteLine(_intro);
+            string intro = "Welcome adventurer! You just entered the sacred forest of Dzed..." + Environment.NewLine + Godess.Information;
+            Console.WriteLine(intro);
             Look(AvatarCurrentRoom);
         }
 

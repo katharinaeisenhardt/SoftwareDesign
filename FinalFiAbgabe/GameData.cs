@@ -200,12 +200,12 @@ namespace FinalFiAbgabe
             public static void EnemyChangeRoom()
             {
                 MethodStore.InteractionCounter = 0;
-                List<Room> _allRooms = new List<Room>(Rooms.Values);
+                List<Room> allRooms = new List<Room>(Rooms.Values);
                 try
                 {
                     Random rand = new Random();
-                    int randomIndex = rand.Next(_allRooms.Count);
-                    Characters["Golem"].CurrentLocation = _allRooms[randomIndex];
+                    int randomIndex = rand.Next(allRooms.Count);
+                    Characters["Golem"].CurrentLocation = allRooms[randomIndex];
                     CountCharacterNumber();
                 }
                 catch
@@ -216,15 +216,15 @@ namespace FinalFiAbgabe
 
             public static void CountCharacterNumber()
             {
-                List<string> _currentRooms = new List<string>();
+                List<string> currentRooms = new List<string>();
 
-                foreach (var _character in Characters)
+                foreach (var character in Characters)
                 {
-                    _currentRooms.Add(_character.Value.CurrentLocation.Name);
+                    currentRooms.Add(character.Value.CurrentLocation.Name);
                 }
 
-                List<string> _sublist = _currentRooms.FindAll(isInList);
-                CharacterNumber = _sublist.Count;
+                List<string> sublist = currentRooms.FindAll(isInList);
+                CharacterNumber = sublist.Count;
 
                 if (CharacterNumber >= 2)
                 {
@@ -232,9 +232,9 @@ namespace FinalFiAbgabe
                 }
             }
 
-            public static bool isInList(string _s)
+            public static bool isInList(string s)
             {
-                if (_s == Characters["Golem"].CurrentLocation.Name)
+                if (s == Characters["Golem"].CurrentLocation.Name)
                 {
                     return true;
                 }
@@ -260,8 +260,8 @@ namespace FinalFiAbgabe
             {
                 Console.WriteLine(Characters["Dragon of the sea"].Information + " I have some good advice for you..." + Environment.NewLine + "In the north you will find the strongest person in this world! At least the strongest enemy." + Environment.NewLine +"Allow me to ask you a question: 'Did you take the chance to slay a Golem yet?'");
                 
-                string _input = Console.ReadLine().ToLower();
-                switch (_input)
+                string input = Console.ReadLine().ToLower();
+                switch (input)
                 {
                     case "y":
                     case "yes":
@@ -287,8 +287,8 @@ namespace FinalFiAbgabe
 
             public static void TalkCases()
             {
-                string _input = Console.ReadLine().ToLower();
-                switch (_input)
+                string input = Console.ReadLine().ToLower();
+                switch (input)
                 {
                     case "y":
                     case "yes":
