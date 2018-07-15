@@ -44,7 +44,7 @@ namespace FinalFiAbgabe
             }
         }
 
-        public static void CheckCharacters()
+        public static void CheckCharactersInRoom()
         {
             foreach (var character in GameData.Characters.Values)
             {

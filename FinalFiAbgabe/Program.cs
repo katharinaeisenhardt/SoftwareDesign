@@ -10,7 +10,7 @@ namespace FinalFiAbgabe
             MethodStore.LoadGameData();
             for (;;)
             {
-                MethodStore.CheckCharacters(); 
+                MethodStore.CheckCharactersInRoom(); 
                 MethodStore.CheckCases();
             } 
         }
