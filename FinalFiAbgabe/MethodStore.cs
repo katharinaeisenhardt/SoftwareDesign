@@ -297,15 +297,15 @@ namespace FinalFiAbgabe
             }
         }
 
-        public static void Take(string _input)
+        public static void Take(string input)
         {
-            _input = Words[1];
-            GameData.Item _foundItem = AvatarCurrentRoom.RoomInventory.Find(x => x.Name.ToLower().Contains(_input));
-            if (_foundItem != null)
+            input = Words[1];
+            GameData.Item foundItem = AvatarCurrentRoom.RoomInventory.Find(x => x.Name.ToLower().Contains(input));
+            if (foundItem != null)
             {
-                Console.WriteLine("You added " + _foundItem.Name + " to your inventory...");
-                Godess.CharacterInventory.Add(_foundItem);
-                AvatarCurrentRoom.RoomInventory.Remove(_foundItem);
+                Console.WriteLine("You added " + foundItem.Name + " to your inventory...");
+                Godess.CharacterInventory.Add(foundItem);
+                AvatarCurrentRoom.RoomInventory.Remove(foundItem);
             }
             else
             {
@@ -313,15 +313,15 @@ namespace FinalFiAbgabe
             }
         }
 
-        public static void Drop(string _input)
+        public static void Drop(string input)
         {
-            _input = Words[1];
-            GameData.Item _foundItem = Godess.CharacterInventory.Find(x => x.Name.ToLower().Contains(_input));
-            if (_foundItem != null)
+            input = Words[1];
+            GameData.Item foundItem = Godess.CharacterInventory.Find(x => x.Name.ToLower().Contains(input));
+            if (foundItem != null)
             {
-                Console.WriteLine("You removed "+ _foundItem.Name + " from your inventory...");
-                AvatarCurrentRoom.RoomInventory.Add(_foundItem);
-                Godess.CharacterInventory.Remove(_foundItem);
+                Console.WriteLine("You removed "+ foundItem.Name + " from your inventory...");
+                AvatarCurrentRoom.RoomInventory.Add(foundItem);
+                Godess.CharacterInventory.Remove(foundItem);
             }
             else
             {
