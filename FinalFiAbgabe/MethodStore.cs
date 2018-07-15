@@ -162,9 +162,9 @@ namespace FinalFiAbgabe
                 Console.WriteLine("-----------------------------------------------------------------------------------------------------------------------------------");
                 Console.WriteLine(String.Format("  {0,-10}  |  {1,-10}  |  {2,-10}  |  {3,-10}  |  {4,-65}  |", "Name", "Type", "Armed?", "Hit/Heal", "Information"));
                 Console.WriteLine("-----------------------------------------------------------------------------------------------------------------------------------");
-                foreach (var _item in Godess.CharacterInventory)
+                foreach (var item in Godess.CharacterInventory)
                 {
-                    Console.WriteLine(String.Format("  {0,-10}  |  {1,-10}  |  {2,-10}  |  {3,-10}  |  {4,-65}  |", _item.Name, _item.Type, _item.IsArmed, _item.Points, _item.Information));
+                    Console.WriteLine(String.Format("  {0,-10}  |  {1,-10}  |  {2,-10}  |  {3,-10}  |  {4,-65}  |", item.Name, item.Type, item.IsArmed, item.Points, item.Information));
                 }
                 Console.WriteLine("-----------------------------------------------------------------------------------------------------------------------------------");
             }
