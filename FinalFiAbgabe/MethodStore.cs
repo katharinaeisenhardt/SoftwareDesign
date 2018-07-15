@@ -93,8 +93,8 @@ namespace FinalFiAbgabe
         public static void InputPrompt()
         {
             Console.WriteLine("What would you like to do?");
-            string _input = Console.ReadLine().ToLower();
-            SplitInput(_input);
+            string input = Console.ReadLine().ToLower();
+            SplitInput(input);
             CheckFightCases(Words);
         }
 
