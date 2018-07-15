@@ -11,6 +11,7 @@ namespace FinalFiAbgabe
             for (;;)
             {
                 MethodStore.CheckCharacters(); 
+                MethodStore.CheckCases();
             } 
         }
     }

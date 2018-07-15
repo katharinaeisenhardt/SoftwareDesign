@@ -77,15 +77,18 @@ namespace FinalFiAbgabe
                         }
                         CheckCases();
                         break;
+
+                        default:
+                        CheckCases();
+                        break;
                     }
                 }
-                CheckCases();
             }
         }
 
         public static void Talk()
         {
-            Console.WriteLine(GameData.Characters["Dragon of the sea"].Information + "I have some good advice for you..." + Environment.NewLine + "In the north you will find the strongest person in this world! At least the strongest enemy." + Environment.NewLine +"Allow me to ask you a question: 'Did you take the chance to slay a Golem yet?'");
+            Console.WriteLine(GameData.Characters["Dragon of the sea"].Information + " I have some good advice for you..." + Environment.NewLine + "In the north you will find the strongest person in this world! At least the strongest enemy." + Environment.NewLine +"Allow me to ask you a question: 'Did you take the chance to slay a Golem yet?'");
             MethodStore.TalkCases();
         }
 
@@ -102,6 +105,11 @@ namespace FinalFiAbgabe
                 case "n":
                 case "no":
                 Console.WriteLine("Ohhh little one! You might want to go back and equip yourself to be the strongest monster slayer ever...");
+                break;
+
+                case "q":
+                case "quit":
+                QuitGame();
                 break;
 
                 default:
@@ -132,12 +140,24 @@ namespace FinalFiAbgabe
             {
                 case "u":
                 case "use":
-                Use(Words[1]);
+                try{
+                    Use(Words[1]);
+                }
+                catch
+                {
+                    Console.WriteLine("WROOOOONG!  You should choose an item!");
+                }
                 break;
 
                 case "a":
                 case "arm":
-                Arm(Words[1]);
+                try{
+                    Arm(Words[1]);
+                }
+                catch
+                {
+                    Console.WriteLine("WROOOOONG!  You should choose an item!");
+                }
                 break;
 
                 case "i":
@@ -336,12 +356,24 @@ namespace FinalFiAbgabe
 
                 case "t":
                 case "take":
-                Take(Words[1]);
+                try{
+                    Take(Words[1]);
+                }
+                catch
+                {
+                    Console.WriteLine("WROOOOONG!  You should choose an item!");
+                }
                 break;
 
                 case "d":
                 case "drop":
-                Drop(Words[1]);
+                try{
+                    Drop(Words[1]);
+                }
+                catch
+                {
+                    Console.WriteLine("WROOOOONG!  You should choose an item!");
+                }
                 break;
 
                 case "n":
@@ -429,7 +461,7 @@ namespace FinalFiAbgabe
             GameData.Item _foundItem = AvatarCurrentRoom.RoomInventory.Find(x => x.Name.ToLower().Contains(_input));
             if (_foundItem != null)
             {
-                Console.WriteLine("You added " + _foundItem.Name + "to your inventory...");
+                Console.WriteLine("You added " + _foundItem.Name + " to your inventory...");
                 Godess.CharacterInventory.Add(_foundItem);
                 AvatarCurrentRoom.RoomInventory.Remove(_foundItem);
             }
@@ -445,7 +477,7 @@ namespace FinalFiAbgabe
             GameData.Item _foundItem = Godess.CharacterInventory.Find(x => x.Name.ToLower().Contains(_input));
             if (_foundItem != null)
             {
-                Console.WriteLine("You removed"+ _foundItem.Name + "from your inventory...");
+                Console.WriteLine("You removed "+ _foundItem.Name + " from your inventory...");
                 AvatarCurrentRoom.RoomInventory.Add(_foundItem);
                 Godess.CharacterInventory.Remove(_foundItem);
             }

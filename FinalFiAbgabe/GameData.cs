@@ -35,11 +35,11 @@ namespace FinalFiAbgabe
             );
             Gear Arrow = new Gear
             (
-            "Arrow","gear","info",0.1F,false
+            "Arrow","gear","You can use me to stab an enemy or send me flying!",0.1F,false
             );
             Health Herb = new Health
             (
-            "Herb","health","info",0.1F,false
+            "Herb","health","You can use me to get stronger!", 0.1F, false
             );
             Glade.RoomInventory.AddRange(new List<Item>(){Arrow, Herb});
 
@@ -50,7 +50,7 @@ namespace FinalFiAbgabe
             );
             Gear Stone = new Gear
             (
-            "Rock","gear","info",0.05F,false
+            "Rock","You can use me to provoke an enemy or to throw me!","info",0.05F,false
             );
             StoneQuarry.RoomInventory.Add(Stone);
 
@@ -67,7 +67,7 @@ namespace FinalFiAbgabe
             );
             Health Potion = new Health
             (
-            "Potion","health","info",0.3F, false
+            "Potion","health","You can use me to get invincible!",0.3F, false
             );
             Sea.RoomInventory.Add(Potion);
 
@@ -171,7 +171,7 @@ namespace FinalFiAbgabe
             );
              Gear Bow = new Gear
             (
-                "Bow", "Gear", "info", 0.3F, false
+                "Bow", "Gear", "You can use me to strike an enemy or shoot an arrow!", 0.3F, false
             );
             Golem.CharacterInventory.Add(Bow);
 
