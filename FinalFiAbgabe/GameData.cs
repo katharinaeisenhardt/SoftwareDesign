@@ -259,29 +259,7 @@ namespace FinalFiAbgabe
             public static void Talk()
             {
                 Console.WriteLine(Characters["Dragon of the sea"].Information + " I have some good advice for you..." + Environment.NewLine + "In the north you will find the strongest person in this world! At least the strongest enemy." + Environment.NewLine +"Allow me to ask you a question: 'Did you take the chance to slay a Golem yet?'");
-                
-                string input = Console.ReadLine().ToLower();
-                switch (input)
-                {
-                    case "y":
-                    case "yes":
-                    Console.WriteLine("Excellent, my mighty warrior. Go now and fulfill your fate on the darkest path in the north!");
-                    break;
-
-                    case "n":
-                    case "no":
-                    Console.WriteLine("Ohhh little one! You might want to go back and equip yourself to be the strongest monster slayer ever...");
-                    break;
-
-                    case "q":
-                    case "quit":
-                    MethodStore.QuitGame();
-                    break;
-
-                    default:
-                    Console.WriteLine("I'm sorry little one... I could not understand you. Please try again and answer with [yes/y] or [no/n].");
-                    TalkCases();
-                    break;
+                TalkCases();
                 }
             }
 
@@ -311,7 +289,6 @@ namespace FinalFiAbgabe
                     break;
                 }
             }
-        }
 
         public static void CreateCharaters()
         {
