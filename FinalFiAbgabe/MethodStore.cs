@@ -32,7 +32,7 @@ namespace FinalFiAbgabe
             Console.WriteLine(room.Information);
             if (room.RoomInventory.Count != 0)
             {
-                Console.WriteLine("You see..."+ Environment.NewLine);
+                Console.WriteLine("You see...");
                 foreach (var item in room.RoomInventory)
                 {
                     Console.WriteLine("a/an " + item.Name);
