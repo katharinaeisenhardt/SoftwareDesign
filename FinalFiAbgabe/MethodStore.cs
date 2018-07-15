@@ -180,9 +180,9 @@ namespace FinalFiAbgabe
             Environment.Exit(0);
         }
 
-        public static void CheckNonFightCases(string[] _input)
+        public static void CheckNonFightCases(string[] input)
         {
-            Words = _input;
+            Words = input;
             switch (Words[0])
             {
                 case "h":
@@ -281,20 +281,21 @@ namespace FinalFiAbgabe
 
         public static void Help()
         {
-            Console.WriteLine("You can use the following commands:"+ Environment.NewLine);
-            foreach (var _command in HelpCommands)
+            List<string> HelpCommands = new List<string>
             {
-                Console.WriteLine(_command);
+                "[help/h]   [look/l]   [inventory/i]",
+                "[take/t <item>]   [drop/d <item>]   [arm/a <item>]   [use/u <item>]",
+                "[north/n]   [east/e]   [south/s]   [west/w]",
+                "[quit/q]",
+                "Use [fight/f] to fight an enemy",
+            };
+
+            Console.WriteLine("You can use the following commands:"+ Environment.NewLine);
+            foreach (var command in HelpCommands)
+            {
+                Console.WriteLine(command);
             }
         }
-
-        public static List<string> HelpCommands = new List<string>
-        {
-            "[help/h]   [look/l]   [inventory/i]",
-            "[take/t <item>]   [drop/d <item>]   [arm/a <item>]   [use/u <item>]",
-            "[north/n]   [east/e]   [south/s]   [west/w]",
-            "[quit/q]"
-        };
 
         public static void Take(string _input)
         {
