@@ -5,7 +5,7 @@ namespace FinalFiAbgabe
 {
     public class GameData
     {
-        public static List<string> commands = new List<string>
+        public static List<string> Commands = new List<string>
         {
             "[help/h]   [look/l]   [inventory/i]",
             "[take/t <item>]   [drop/d <item>]   [arm/a <item>]   [use/u <item>]",
@@ -13,14 +13,9 @@ namespace FinalFiAbgabe
             "[quit/q]"
         };
 
-        
-        public static Room Glade;
-        public static Room StoneQuarry;
-        public static Room RabbitHole;
-        public static Room Sea;
-        public static Room DeathValley;
-
-        public static List<Room> rooms;
+        public static Dictionary<string, Room> Rooms;
+        public static Dictionary<string, Character> Characters;
+        //public static Dictionary<string, Item> items;
 
         public class Room
         {
@@ -30,58 +25,71 @@ namespace FinalFiAbgabe
             public Room east;
             public Room south;
             public Room west;
+            public List<Item> _roomInventory = new List<Item>();
 
             public Room(string name, string information)
             {
                 this._name = name;
                 this._information = information;
             }
-
-            public static void RoomDescription(Room room)
-            {
-                room = GameData.characters["Godess of the forest"]._currentLocation;
-                Console.Write(room._name);
-                Console.Write(room._information);
-            }
         }
 
         public static void CreateRooms()
         {
-            Glade = new Room
+            Room Glade = new Room
             (
-                "Silent Wood Glade",
+                "Silent Glade",
                 "You just arrived at the Silent Glade..."
             );
+            Gear Arrow = new Gear
+            (
+            "Arrow","gear","info",0.1F,false
+            );
+            Health Herb = new Health
+            (
+            "Herb","health","info",0.1F,false
+            );
+            Glade._roomInventory.AddRange(new List<Item>(){Arrow, Herb});
 
-            StoneQuarry = new Room
+            Room StoneQuarry = new Room
             (
                 "Brachial Stone Quarry",
                 "You just arrived at the Brachial Stone Quarry..."
-
             );
+            Gear Stone = new Gear
+            (
+            "Rock","gear","info",0.05F,false
+            );
+            StoneQuarry._roomInventory.Add(Stone);
 
-            RabbitHole = new Room
+            Room RabbitHole = new Room
             (
                "Dark Rabbit Hole",
                 "You just entered the Dark Rabbit Hole..."
             );
 
-            Sea = new Room
+            Room Sea = new Room
             (
                 "Sacred Sea",
-                "You just arrived at the Sacred Sea..."
+                "You just arrived at the bay of the Sacred Sea..."
             );
+            Health Potion = new Health
+            (
+            "Potion","health","info",0.3F, false
+            );
+            Sea._roomInventory.Add(Potion);
 
-            DeathValley = new Room
+            Room DeathValley = new Room
             (
                 "Haunted Valley of Death",
                 "You just entered the Haunted Valley of Death..."
             );
-
+ 
             Glade.north = StoneQuarry;
 
-            StoneQuarry.west = RabbitHole;
             StoneQuarry.east = Sea;
+            StoneQuarry.south = Glade;
+            StoneQuarry.west = RabbitHole;
 
             RabbitHole.east = StoneQuarry;
             RabbitHole.south = Glade;
@@ -91,98 +99,92 @@ namespace FinalFiAbgabe
 
             DeathValley.south = Sea;
 
-            rooms = new List <Room>(){Glade, StoneQuarry, RabbitHole, Sea, DeathValley};
-            
+            Rooms = new Dictionary<string, Room>();
+            Rooms["Silent Wood Glade"] = Glade;
+            Rooms["Brachial Stone Quarry"] = StoneQuarry;
+            Rooms["Dark Rabbit Hole"] = RabbitHole;
+            Rooms["Sacred Sea"] = Sea;
+            Rooms["Haunted Valley of Death"] = DeathValley;
         }
-
 
         public class Character
         {
-            public static int RoomChangeCounter = 0;
             public string _name;
             public float _lifepoints;
             public float _hitpoints;
             public string _information;
             public Room _currentLocation;
-            public List<Item> _characterInventory;
+            public List<Item> _characterInventory = new List <Item>();
         }
 
         public class Enemy : Character
         {
-            public Enemy(string name, float lifepoints, float hitpoints, string information/*, Room currentLocation*/)
+            public Enemy(string name, float lifepoints, float hitpoints, string information, Room currentLocation)
             {
                 this._name = name;
                 this._lifepoints = lifepoints;
                 this._hitpoints = hitpoints;
                 this._information = information;
-                //this._currentLocation = currentLocation;
+                this._currentLocation = currentLocation;
             }
         }
 
         public class Avatar : Character
         {
-            public Avatar(string name, float lifepoints, float hitpoints, string information/*, Room currentLocation*/)
+            public Avatar(string name, float lifepoints, float hitpoints, string information, Room currentLocation)
             {
                 this._name = name;
                 this._lifepoints = lifepoints;
                 this._hitpoints = hitpoints;
                 this._information = information;
-                //this._currentLocation = currentLocation;
-            }
-
-            public static void Fight()
-            {
-               
+                this._currentLocation = currentLocation;
             }
         }
 
         public class Helper : Character
         {
-            public Helper(string name, float lifepoints, float hitpoints, string information/*, Room currentLocation*/)
+            public Helper(string name, float lifepoints, float hitpoints, string information, Room currentLocation)
             {
                 this._name = name;
                 this._lifepoints = lifepoints;
                 this._hitpoints = hitpoints;
                 this._information = information;
-                //this._currentLocation = currentLocation;
-            }
-
-            public static void Talk()
-            {
-                Console.WriteLine("Greetings, brave adventurer. I'm the Dragon of the sea! I have some good advice for you..." + Environment.NewLine + "In the north you will find the strongest person in this world! At least the strongest enemy." + Environment.NewLine +"Allow me to ask you a question: 'Did you take the chance to slay a Golem yet?'");
-                MethodStore.TalkCases();
+                this._currentLocation = currentLocation;
             }
         }
-        public static Dictionary<string, Character> characters;
-        public static void CreateCharacters()
+
+        public static void CreateCharaters()
         {
             Avatar ForestGodess = new Avatar
             (
             "Godess of the forest",
             1F, 
             0.2F, 
-            "I'm the Godess of the forest. I'm your Avatar. Our Mission is to free the forest spirits from the tyrannic Deathking!"/*, 
-            rooms[0]*/
-
+            "I'm the " +  Characters["Godess of the forest"]._name + " I'm your Avatar."+Environment.NewLine+"Our Mission is to free the forest spirits from the tyrannic Deathking!",
+            Rooms["Silent Wood Glade"]
             );
 
             Enemy Golem = new Enemy
             (
             "Golem", 
             0.6F, 
-            0.15F, 
-            "GRRRRR!"/*, 
-            rooms[2]*/
-            
+            0.1F, 
+            "GRRRRRR! "+ Characters["Golem"]._name + " GRRRRRR!", 
+            Rooms["Dark Rabbit Hole"]
             );
+             Gear Bow = new Gear
+            (
+                "Bow", "Gear", "info", 0.3F, false
+            );
+            Golem._characterInventory.Add(Bow);
 
             Enemy DeathKing = new Enemy
             (
             "King of death", 
             1F, 
             0.3F, 
-            "GRRRR! I'm the King of death! Weak as ever, you might as well just die!"/*, 
-            rooms[5]*/
+            "GRRRR! I'm the " + Characters["King of death"]._name + "! You Peasant! Weak as ever, you might as well just die!", 
+            Rooms["Haunted Valley of Death"]
             );
 
             Helper Dragon = new Helper
@@ -190,107 +192,46 @@ namespace FinalFiAbgabe
             "Dragon of the sea", 
             1F, 
             1F, 
-            "I'm the Dragon of the sea!"/*, 
-            rooms[4]*/
+            "Hiss, huff and puff!!! Greetings, brave adventurer. I'm the " +Characters["Dragon of the sea"]._name +". Hiss, huff and puff!!!",  
+            Rooms["Sacred Sea"]
             );
 
-            characters = new Dictionary<string, Character>();
-            characters["Godess of the forest"] = ForestGodess;
-            characters["Golem"] = Golem;
-            characters["King of death"] = DeathKing;
-            characters["Dragoon of the sea"] = Dragon;
+            Characters = new Dictionary<string, Character>();
+            Characters["Godess of the forest"] = ForestGodess;
+            Characters["Golem"] = Golem;
+            Characters["King of death"] = DeathKing;
+            Characters["Dragon of the sea"] = Dragon;
         }
 
         public class Item
         {
-            public string name;
-            public string type;
-            public string information;
+            public string _name;
+            public string _type;
+            public string _information;
+            public float _points;
+            public bool _isArmed;
         }
 
         public class Health : Item
         {
-            public float lifepoints;
-            public static void use()
+            public Health(string name, string type, string information, float lifepoints, bool isArmed)
             {
-                //adds lifepoints
+                this._name = name;
+                this._type = type;
+                this._information = information;
+                this._points = lifepoints;
+                this._isArmed =isArmed;
             }
         }
         public class Gear : Item
         {
-            public float hitpoints;
-            public bool isArmed;
-        }
-
-        public class Potion : Health
-        {
-        }
-
-        public class Herb : Health
-        {
-        }
-
-        public class Arrow : Gear
-        {
-        }
-
-        public class Bow : Gear
-        {
-        }
-
-        public class Stones : Gear
-        {
-        }
-
-        public class ItemSetup
-        {
-            public static List<Item> gear = new List<Item>();
-            public static List<Health> health = new List<Health>();
-
-            public static Gear Arrow;
-            public static Gear Bow;
-            public static Health Potion;
-
-            public static Health Herb;
-            public static void createItem()
+            public Gear(string name, string type, string information, float hitpoints, bool isArmed)
             {
-                Arrow = new Gear
-                {
-                name = "Arrow",
-                type = "gear",
-                information = "info",
-                hitpoints = 0.1F,
-                isArmed = false,
-                };
-                gear.Add(Arrow);
-
-                Bow = new Gear
-                {
-                name = "Arrow",
-                type = "gear",
-                information = "info",
-                hitpoints = 0.3F,
-                isArmed = false,
-                };
-                gear.Add(Bow);
-            
-                Potion = new Health
-                {
-                name = "Potion",
-                type = "health",
-                information = "info",
-                lifepoints = 0.1F,
-                };
-                health.Add(Potion);
-
-                Herb = new Health
-                {
-                name = "Potion",
-                type = "health",
-                information = "info",
-                lifepoints = 0.1F,
-                };
-                health.Add(Potion);
+                this._name = name;
+                this._type = type;
+                this._information = information;
+                this._points = hitpoints;
+                this._isArmed = isArmed;
             }
         }
     }
