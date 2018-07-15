@@ -5,32 +5,24 @@ namespace FinalFiAbgabe
 {
     public class GameData
     {
-        public static List<string> Commands = new List<string>
-        {
-            "[help/h]   [look/l]   [inventory/i]",
-            "[take/t <item>]   [drop/d <item>]   [arm/a <item>]   [use/u <item>]",
-            "[move/m <direction>]",
-            "[quit/q]"
-        };
-
         public static Dictionary<string, Room> Rooms;
         public static Dictionary<string, Character> Characters;
-        //public static Dictionary<string, Item> items;
+        public static Dictionary<string, Item> Items = new Dictionary<string, Item>();
 
         public class Room
         {
-            public string _name;
-            public string _information;
-            public Room north;
-            public Room east;
-            public Room south;
-            public Room west;
-            public List<Item> _roomInventory = new List<Item>();
+            public string Name;
+            public string Information;
+            public Room North;
+            public Room East;
+            public Room South;
+            public Room West;
+            public List<Item> RoomInventory = new List<Item>();
 
             public Room(string name, string information)
             {
-                this._name = name;
-                this._information = information;
+                this.Name = name;
+                this.Information = information;
             }
         }
 
@@ -49,7 +41,7 @@ namespace FinalFiAbgabe
             (
             "Herb","health","info",0.1F,false
             );
-            Glade._roomInventory.AddRange(new List<Item>(){Arrow, Herb});
+            Glade.RoomInventory.AddRange(new List<Item>(){Arrow, Herb});
 
             Room StoneQuarry = new Room
             (
@@ -60,7 +52,7 @@ namespace FinalFiAbgabe
             (
             "Rock","gear","info",0.05F,false
             );
-            StoneQuarry._roomInventory.Add(Stone);
+            StoneQuarry.RoomInventory.Add(Stone);
 
             Room RabbitHole = new Room
             (
@@ -77,7 +69,7 @@ namespace FinalFiAbgabe
             (
             "Potion","health","info",0.3F, false
             );
-            Sea._roomInventory.Add(Potion);
+            Sea.RoomInventory.Add(Potion);
 
             Room DeathValley = new Room
             (
@@ -85,19 +77,19 @@ namespace FinalFiAbgabe
                 "You just entered the Haunted Valley of Death..."
             );
  
-            Glade.north = StoneQuarry;
+            Glade.North = StoneQuarry;
 
-            StoneQuarry.east = Sea;
-            StoneQuarry.south = Glade;
-            StoneQuarry.west = RabbitHole;
+            StoneQuarry.East = Sea;
+            StoneQuarry.South = Glade;
+            StoneQuarry.West = RabbitHole;
 
-            RabbitHole.east = StoneQuarry;
-            RabbitHole.south = Glade;
+            RabbitHole.East = StoneQuarry;
+            RabbitHole.South = Glade;
 
-            Sea.north = DeathValley;
-            Sea.west = StoneQuarry;
+            Sea.North = DeathValley;
+            Sea.West = StoneQuarry;
 
-            DeathValley.south = Sea;
+            DeathValley.South = Sea;
 
             Rooms = new Dictionary<string, Room>();
             Rooms["Silent Wood Glade"] = Glade;
@@ -105,27 +97,32 @@ namespace FinalFiAbgabe
             Rooms["Dark Rabbit Hole"] = RabbitHole;
             Rooms["Sacred Sea"] = Sea;
             Rooms["Haunted Valley of Death"] = DeathValley;
+
+            Items["Arrow"] = Arrow;
+            Items["Rocks"] = Stone;
+            Items["Herb"] = Herb;
+            Items["Potion"] = Potion;
         }
 
         public class Character
         {
-            public string _name;
-            public float _lifepoints;
-            public float _hitpoints;
-            public string _information;
-            public Room _currentLocation;
-            public List<Item> _characterInventory = new List <Item>();
+            public string Name;
+            public float Lifepoints;
+            public float Hitpoints;
+            public string Information;
+            public Room CurrentLocation;
+            public List<Item> CharacterInventory = new List <Item>();
         }
 
         public class Enemy : Character
         {
             public Enemy(string name, float lifepoints, float hitpoints, string information, Room currentLocation)
             {
-                this._name = name;
-                this._lifepoints = lifepoints;
-                this._hitpoints = hitpoints;
-                this._information = information;
-                this._currentLocation = currentLocation;
+                this.Name = name;
+                this.Lifepoints = lifepoints;
+                this.Hitpoints = hitpoints;
+                this.Information = information;
+                this.CurrentLocation = currentLocation;
             }
         }
 
@@ -133,11 +130,11 @@ namespace FinalFiAbgabe
         {
             public Avatar(string name, float lifepoints, float hitpoints, string information, Room currentLocation)
             {
-                this._name = name;
-                this._lifepoints = lifepoints;
-                this._hitpoints = hitpoints;
-                this._information = information;
-                this._currentLocation = currentLocation;
+                this.Name = name;
+                this.Lifepoints = lifepoints;
+                this.Hitpoints = hitpoints;
+                this.Information = information;
+                this.CurrentLocation = currentLocation;
             }
         }
 
@@ -145,11 +142,11 @@ namespace FinalFiAbgabe
         {
             public Helper(string name, float lifepoints, float hitpoints, string information, Room currentLocation)
             {
-                this._name = name;
-                this._lifepoints = lifepoints;
-                this._hitpoints = hitpoints;
-                this._information = information;
-                this._currentLocation = currentLocation;
+                this.Name = name;
+                this.Lifepoints = lifepoints;
+                this.Hitpoints = hitpoints;
+                this.Information = information;
+                this.CurrentLocation = currentLocation;
             }
         }
 
@@ -160,7 +157,7 @@ namespace FinalFiAbgabe
             "Godess of the forest",
             1F, 
             0.2F, 
-            "I'm the " +  Characters["Godess of the forest"]._name + " I'm your Avatar."+Environment.NewLine+"Our Mission is to free the forest spirits from the tyrannic Deathking!",
+            "I'm the " +  Characters["Godess of the forest"].Name + " I'm your Avatar."+Environment.NewLine+"Our Mission is to free the forest spirits from the tyrannic Deathking!",
             Rooms["Silent Wood Glade"]
             );
 
@@ -169,21 +166,21 @@ namespace FinalFiAbgabe
             "Golem", 
             0.6F, 
             0.1F, 
-            "GRRRRRR! "+ Characters["Golem"]._name + " GRRRRRR!", 
+            "GRRRRRR! "+ Characters["Golem"].Name + " GRRRRRR!", 
             Rooms["Dark Rabbit Hole"]
             );
              Gear Bow = new Gear
             (
                 "Bow", "Gear", "info", 0.3F, false
             );
-            Golem._characterInventory.Add(Bow);
+            Golem.CharacterInventory.Add(Bow);
 
             Enemy DeathKing = new Enemy
             (
             "King of death", 
             1F, 
             0.3F, 
-            "GRRRR! I'm the " + Characters["King of death"]._name + "! You Peasant! Weak as ever, you might as well just die!", 
+            "GRRRR! I'm the " + Characters["King of death"].Name + "! You Peasant! Weak as ever, you might as well just die!", 
             Rooms["Haunted Valley of Death"]
             );
 
@@ -192,9 +189,11 @@ namespace FinalFiAbgabe
             "Dragon of the sea", 
             1F, 
             1F, 
-            "Hiss, huff and puff!!! Greetings, brave adventurer. I'm the " +Characters["Dragon of the sea"]._name +". Hiss, huff and puff!!!",  
+            "Hiss, huff and puff!!! Greetings, brave adventurer. I'm the " +Characters["Dragon of the sea"].Name +". Hiss, huff and puff!!!",  
             Rooms["Sacred Sea"]
             );
+
+            Items["Bow"] = Bow;
 
             Characters = new Dictionary<string, Character>();
             Characters["Godess of the forest"] = ForestGodess;
@@ -205,33 +204,33 @@ namespace FinalFiAbgabe
 
         public class Item
         {
-            public string _name;
-            public string _type;
-            public string _information;
-            public float _points;
-            public bool _isArmed;
+            public string Name;
+            public string Type;
+            public string Information;
+            public float Points;
+            public bool IsArmed;
         }
 
         public class Health : Item
         {
             public Health(string name, string type, string information, float lifepoints, bool isArmed)
             {
-                this._name = name;
-                this._type = type;
-                this._information = information;
-                this._points = lifepoints;
-                this._isArmed =isArmed;
+                this.Name = name;
+                this.Type = type;
+                this.Information = information;
+                this.Points = lifepoints;
+                this.IsArmed = isArmed;
             }
         }
         public class Gear : Item
         {
             public Gear(string name, string type, string information, float hitpoints, bool isArmed)
             {
-                this._name = name;
-                this._type = type;
-                this._information = information;
-                this._points = hitpoints;
-                this._isArmed = isArmed;
+                this.Name = name;
+                this.Type = type;
+                this.Information = information;
+                this.Points = hitpoints;
+                this.IsArmed = isArmed;
             }
         }
     }

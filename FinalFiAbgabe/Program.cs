@@ -11,7 +11,7 @@ namespace FinalFiAbgabe
             
             for (;;)
             {
-                MethodStore.CheckEnemy();   
+                MethodStore.CheckCharacters();   
             } 
             
             //MethodStore.DisplayInventory();
