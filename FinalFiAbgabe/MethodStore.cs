@@ -177,7 +177,7 @@ namespace FinalFiAbgabe
 
         public static void QuitGame()
         {
-            Console.WriteLine("Game over!");
+            Console.WriteLine("Game over");
             Environment.Exit(0);
         }
 
