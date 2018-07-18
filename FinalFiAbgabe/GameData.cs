@@ -161,7 +161,7 @@ namespace FinalFiAbgabe
                                 godess.CharacterInventory.Add(enemy.CharacterInventory[0]);
                                 enemy.CharacterInventory.Remove(enemy.CharacterInventory[0]);
                                 Console.WriteLine("Awesome! You snatched the enemy's inventory!");
-                                MethodStore.InputPrompt();
+                                
                             }
                             MethodStore.IsFighting = false;
                             enemy.Lifepoints = 1F;
